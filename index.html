@@ -21,191 +21,206 @@
     <!-- Floating Digital Particles & Coordinate Labels -->
     <div class="preloader-particles" id="preloader-particles"></div>
     <div class="preloader-coords-hud">
-      <span class="hud-coords">SYS_LAT: 9°40'15.4"N</span>
-      <span class="hud-coords">SYS_LNG: 80°01'24.8"E</span>
-      <span class="hud-coords">ALT: 18.2m</span>
-      <span class="hud-coords">UTM_Z: 44N</span>
+      <span class="hud-coords">UTM ZONE 44N</span>
+      <span class="hud-coords">ELEVATION: 18.2m</span>
+      <span class="hud-coords">REF_PT: 09°40'15"N / 80°01'24"E</span>
     </div>
 
     <!-- Center HUD Display -->
     <div class="preloader-core">
       <!-- Title Block -->
       <div class="preloader-title-block">
-        <div class="preloader-sub-hud">SYSTEM ACCESS AUTHORIZED // LEVEL 1</div>
-        <h1 class="preloader-title">NIVETHIKA'S PLANNING PORTAL</h1>
+        <h1 class="preloader-title">NIVETHIKA S</h1>
         <p class="preloader-subtitle">Urban Planner • GIS & Spatial Analyst • Development Planning</p>
       </div>
 
-      <!-- Main GIS Canvas / Visualization Area -->
+      <!-- Main GIS Canvas / Visualization Area (Building the City) -->
       <div class="preloader-visual-container">
-        <!-- Pixar-style 3D Chibi Planner Background -->
-        <img src="chibi_planner.png" alt="3D Chibi Planner Workstation" class="preloader-bg-img">
-        
         <!-- Overlay HUD Reticle -->
         <div class="visual-reticle"></div>
         
-        <svg id="preloader-canvas" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <svg id="preloader-canvas" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
           <!-- Radial gradient background -->
           <defs>
             <radialGradient id="visual-radial" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stop-color="#232421" stop-opacity="0.9" />
+              <stop offset="0%" stop-color="#232421" stop-opacity="0.95" />
               <stop offset="100%" stop-color="#151515" stop-opacity="1" />
             </radialGradient>
-            <linearGradient id="scan-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#D6C3A5" stop-opacity="0" />
-              <stop offset="50%" stop-color="#D6C3A5" stop-opacity="0.25" />
+            <!-- Streetlight glow -->
+            <radialGradient id="lamp-glow" cx="50%" cy="50%" r="40%">
+              <stop offset="0%" stop-color="#D6C3A5" stop-opacity="0.8" />
               <stop offset="100%" stop-color="#D6C3A5" stop-opacity="0" />
-            </linearGradient>
-            <radialGradient id="heat-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#B56F4C" stop-opacity="0.4" />
-              <stop offset="100%" stop-color="#B56F4C" stop-opacity="0" />
             </radialGradient>
           </defs>
 
           <!-- SVG Canvas Base Grid -->
-          <rect width="800" height="400" fill="url(#visual-radial)" />
+          <rect width="800" height="300" fill="url(#visual-radial)" />
           
-          <!-- Desk Surface Line -->
-          <line x1="40" y1="290" x2="330" y2="290" stroke="#454541" stroke-width="2" />
+          <!-- Topographic contour lines backdrop (Sage Green, low opacity) -->
+          <g stroke="#7A8C73" stroke-opacity="0.1" stroke-width="1" fill="none">
+            <path d="M -50,60 Q 150,20 350,70 T 850,50" />
+            <path d="M -50,110 Q 100,120 300,90 T 850,130" />
+            <path d="M -50,190 Q 200,170 450,210 T 850,180" />
+            <path d="M -50,240 Q 250,250 550,230 T 850,260" />
+          </g>
           
-          <!-- Chair Outline -->
-          <path d="M 110,290 L 110,230 L 130,230 M 110,250 L 130,250" stroke="#454541" stroke-width="1.5" fill="none" stroke-linecap="round" />
-          <line x1="100" y1="290" x2="125" y2="290" stroke="#454541" stroke-width="2.5" />
-          
-          <!-- Girl Planner Silhouette working at laptop -->
-          <g id="preloader-planner" stroke="#D6C3A5" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Head & Hair Bun -->
-            <circle cx="155" cy="180" r="13" />
-            <circle cx="146" cy="170" r="6" />
-            <!-- Glasses node -->
-            <path d="M 158,178 L 166,178 M 162,176 L 162,181" stroke-width="1.2" />
-            <!-- Neck -->
-            <line x1="155" y1="193" x2="155" y2="202" />
-            <!-- Spine / Back -->
-            <path d="M 155,202 Q 138,212 135,235 C 133,250 138,265 146,290" />
-            <!-- Arms typing on laptop -->
-            <path d="M 153,208 C 172,216 195,225 210,248 L 244,276" />
-            <!-- Laptop on the desk -->
-            <!-- Base keyboard deck -->
-            <line x1="235" y1="290" x2="280" y2="290" stroke="#C9C2B8" stroke-width="3" />
-            <!-- Tilted screen -->
-            <line x1="280" y1="290" x2="296" y2="255" stroke="#C9C2B8" stroke-width="2.2" />
+          <!-- GIS Grid coordinates -->
+          <g stroke="#454541" stroke-opacity="0.25" stroke-width="0.5" fill="none">
+            <line x1="100" y1="0" x2="100" y2="300" />
+            <line x1="200" y1="0" x2="200" y2="300" />
+            <line x1="300" y1="0" x2="300" y2="300" />
+            <line x1="400" y1="0" x2="400" y2="300" />
+            <line x1="500" y1="0" x2="500" y2="300" />
+            <line x1="600" y1="0" x2="600" y2="300" />
+            <line x1="700" y1="0" x2="700" y2="300" />
+            <line x1="0" y1="75" x2="800" y2="75" />
+            <line x1="0" y1="150" x2="800" y2="150" />
+            <line x1="0" y1="225" x2="800" y2="225" />
           </g>
 
-          <!-- Holographic Projection Rays from laptop screen -->
-          <g opacity="0.7">
-            <polygon points="288,270 380,80 750,330 288,270" fill="rgba(214, 195, 165, 0.03)" stroke="rgba(214, 195, 165, 0.12)" stroke-width="1" stroke-dasharray="2 3" />
-            <line x1="288" y1="270" x2="380" y2="80" stroke="var(--accent-sage)" stroke-width="0.8" opacity="0.3" />
-            <line x1="288" y1="270" x2="750" y2="330" stroke="var(--accent-sage)" stroke-width="0.8" opacity="0.3" />
-          </g>
+          <!-- The Pavement Asphalt -->
+          <path id="road-asphalt" d="M 50,150 L 750,150" stroke="#2F302D" stroke-width="20" stroke-linecap="round" fill="none" stroke-dasharray="700" stroke-dashoffset="700" />
+          <!-- Center Dash Markings -->
+          <path id="road-markings" d="M 50,150 L 750,150" stroke="#D6C3A5" stroke-width="1.2" stroke-dasharray="10 8" fill="none" stroke-dasharray="700" stroke-dashoffset="700" opacity="0" />
 
           <!-- ==========================================
-               Projected City layers (Hologram on the right)
+               Urban Development Assets (Revealed dynamically)
                ========================================== -->
           
-          <!-- Isometric Grid Coordinates Mesh -->
-          <g id="preloader-layer-grid" opacity="0.4" stroke="#454541" stroke-width="0.5" fill="none">
-            <path d="M 330,205 L 540,100 L 750,205 L 540,310 Z" />
-            <line x1="382" y1="180" x2="592" y2="285" />
-            <line x1="435" y1="154" x2="645" y2="259" />
-            <line x1="487" y1="127" x2="697" y2="232" />
-            
-            <line x1="382" y1="230" x2="592" y2="125" />
-            <line x1="435" y1="256" x2="645" y2="151" />
-            <line x1="487" y1="282" x2="697" y2="177" />
+          <!-- Stage 1 (0-20%): Survey points & contours -->
+          <g class="city-asset" data-x="110">
+            <circle cx="110" cy="150" r="5" fill="none" stroke="#B56F4C" stroke-width="1" />
+            <line x1="110" y1="135" x2="110" y2="165" stroke="#B56F4C" stroke-width="0.8" stroke-dasharray="2 2" />
+            <line x1="95" y1="150" x2="125" y2="150" stroke="#B56F4C" stroke-width="0.8" stroke-dasharray="2 2" />
+            <text x="115" y="132" fill="#B56F4C" font-family="monospace" font-size="7px">BM_492</text>
+          </g>
+          <g class="city-asset" data-x="160">
+            <polygon points="160,140 164,148 156,148" fill="none" stroke="#7A8C73" stroke-width="1" />
+            <text x="165" y="145" fill="#7A8C73" font-family="monospace" font-size="7px">STATION_01</text>
           </g>
 
-          <!-- Heatmap analysis glow (Activated 60-75%) -->
-          <g id="preloader-layer-heatmap" opacity="0">
-            <circle cx="480" cy="210" r="70" fill="url(#heat-glow)" />
-            <circle cx="580" cy="180" r="55" fill="url(#heat-glow)" />
+          <!-- Stage 2 (20-40%): Sidewalk paths, Trees & Lights -->
+          <g class="city-asset" data-x="220">
+            <!-- Tree 1 -->
+            <path d="M 220,136 L 225,122 L 215,122 Z" fill="#7A8C73" fill-opacity="0.8" stroke="#7A8C73" stroke-width="0.5" />
+            <line x1="220" y1="136" x2="220" y2="140" stroke="#454541" stroke-width="1.2" />
+          </g>
+          <g class="city-asset" data-x="260">
+            <!-- Sidewalk detail -->
+            <line x1="250" y1="138" x2="290" y2="138" stroke="#454541" stroke-width="1.5" />
+            <!-- Streetlight -->
+            <path d="M 270,138 L 270,115 Q 270,110 275,110 L 280,110" stroke="#D6C3A5" stroke-width="1" fill="none" />
+            <circle cx="280" cy="112" r="3" fill="url(#lamp-glow)" class="streetlight-glow" opacity="0" />
+            <circle cx="280" cy="110" r="1" fill="#F4EFE6" />
+          </g>
+          <g class="city-asset" data-x="310">
+            <!-- Tree 2 -->
+            <circle cx="310" cy="125" r="5.5" fill="#7A8C73" fill-opacity="0.75" />
+            <line x1="310" y1="130" x2="310" y2="140" stroke="#454541" stroke-width="1.2" />
           </g>
 
-          <!-- Roads Layer (Activated 15-30%) -->
-          <g id="preloader-layer-roads" opacity="0" stroke="#D6C3A5" stroke-width="1.8" stroke-linecap="round" fill="none">
-            <!-- Road Centerlines inside hologram -->
-            <path d="M 360,220 L 720,140" stroke-dasharray="1000" stroke-dashoffset="1000" class="road-path" />
-            <path d="M 460,110 L 600,280" stroke-dasharray="1000" stroke-dashoffset="1000" class="road-path" />
-            <path d="M 400,160 L 680,240" stroke-dasharray="1000" stroke-dashoffset="1000" class="road-path" stroke-opacity="0.6" stroke-width="1.2" />
-            <!-- Nodes (Intersections) -->
-            <circle cx="516" cy="185" r="3.5" fill="#D6C3A5" stroke="#151515" stroke-width="1.5" />
-            <circle cx="583" cy="170" r="3.5" fill="#D6C3A5" stroke="#151515" stroke-width="1.5" />
+          <!-- Stage 3 (40-60%): Buildings & Green Spaces -->
+          <g class="city-asset" data-x="370">
+            <!-- Residential block -->
+            <rect x="355" y="92" width="28" height="46" fill="#232421" stroke="#B56F4C" stroke-width="1.2" rx="1" />
+            <line x1="363" y1="102" x2="375" y2="102" stroke="#454541" stroke-width="1" />
+            <line x1="363" y1="114" x2="375" y2="114" stroke="#454541" stroke-width="1" />
+            <line x1="363" y1="126" x2="375" y2="126" stroke="#454541" stroke-width="1" />
+          </g>
+          <g class="city-asset" data-x="415">
+            <!-- Small Public Park -->
+            <rect x="400" y="125" width="30" height="13" fill="#7A8C73" fill-opacity="0.25" stroke="#7A8C73" stroke-width="0.8" rx="1" />
+            <rect x="408" y="127" width="14" height="5" fill="none" stroke="#D6C3A5" stroke-width="0.6" />
+          </g>
+          <g class="city-asset" data-x="465">
+            <!-- Commercial building -->
+            <rect x="450" y="74" width="30" height="64" fill="#232421" stroke="#D6C3A5" stroke-width="1.2" rx="1.5" />
+            <!-- Windows -->
+            <rect x="456" y="84" width="6" height="5" class="window-glow" fill="#454541" />
+            <rect x="468" y="84" width="6" height="5" class="window-glow" fill="#454541" />
+            <rect x="456" y="96" width="6" height="5" class="window-glow" fill="#454541" />
+            <rect x="468" y="96" width="6" height="5" class="window-glow" fill="#454541" />
+            <rect x="456" y="108" width="6" height="5" class="window-glow" fill="#454541" />
+            <rect x="468" y="108" width="6" height="5" class="window-glow" fill="#454541" />
           </g>
 
-          <!-- Zoning/Parcels Layer (Activated 30-45%) -->
-          <g id="preloader-layer-parcels" opacity="0" stroke="#454541" stroke-width="0.8">
-            <polygon points="500,185 540,165 570,200 530,220" fill="#B56F4C" fill-opacity="0.25" />
-            <polygon points="430,170 470,150 490,180 450,200" fill="#B56F4C" fill-opacity="0.2" />
-            <polygon points="580,160 620,140 650,175 610,195" fill="#7A8C73" fill-opacity="0.3" />
+          <!-- Stage 4 (60-80%): Signals, Crosswalks & Cycle path -->
+          <g class="city-asset" data-x="510">
+            <!-- Zebra Crossing -->
+            <line x1="495" y1="138" x2="525" y2="138" stroke="#454541" stroke-width="1.5" />
+            <rect x="500" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
+            <rect x="506" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
+            <rect x="512" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
+            <rect x="518" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
+          </g>
+          <g class="city-asset" data-x="545">
+            <!-- Traffic Light -->
+            <line x1="545" y1="138" x2="545" y2="116" stroke="#D6C3A5" stroke-width="1" />
+            <rect x="542" y="104" width="6" height="12" fill="#2F302D" rx="0.5" />
+            <circle cx="545" cy="107" r="1" fill="#7A8C73" class="traffic-light-green" opacity="0.3" />
+            <circle cx="545" cy="110" r="1" fill="#454541" />
+            <circle cx="545" cy="113" r="1" fill="#454541" />
+          </g>
+          <g class="city-asset" data-x="585">
+            <!-- Cycle line details -->
+            <line x1="570" y1="138" x2="600" y2="138" stroke="#7A8C73" stroke-width="1" stroke-dasharray="2 2" />
+            <circle cx="585" cy="126" r="5" fill="#7A8C73" fill-opacity="0.7" />
+            <line x1="585" y1="131" x2="585" y2="140" stroke="#454541" stroke-width="1" />
           </g>
 
-          <!-- Isometric Buildings Layer (Activated 45-60%) -->
-          <g id="preloader-layer-buildings" fill="none">
-            <!-- Building A (Tall tower commercial) -->
-            <g class="iso-building" data-height="100" data-x="530" data-y="190">
-              <polygon points="530,190 530,190 545,180 545,180 560,190 560,190 545,200 545,200" class="iso-top" fill="#D6C3A5" stroke="#D6C3A5" stroke-width="0.5" />
-              <polygon points="530,190 530,190 545,200 545,200 545,200 530,190" class="iso-left" fill="#2F302D" stroke="#454541" stroke-width="0.5" />
-              <polygon points="545,200 545,200 560,190 560,190 560,190 545,200" class="iso-right" fill="#232421" stroke="#454541" stroke-width="0.5" />
-            </g>
-            <!-- Building B (Medium density) -->
-            <g class="iso-building" data-height="70" data-x="490" data-y="210">
-              <polygon points="490,210 490,210 505,200 505,200 520,210 520,210 505,220 505,220" class="iso-top" fill="#7A8C73" stroke="#7A8C73" stroke-width="0.5" />
-              <polygon points="490,210 490,210 505,220 505,220 505,220 490,210" class="iso-left" fill="#2F302D" stroke="#454541" stroke-width="0.5" />
-              <polygon points="505,220 505,220 520,210 520,210 520,210 505,220" class="iso-right" fill="#232421" stroke="#454541" stroke-width="0.5" />
-            </g>
-            <!-- Building C (Low residential block) -->
-            <g class="iso-building" data-height="45" data-x="570" data-y="170">
-              <polygon points="570,170 570,170 585,160 585,160 600,170 600,170 585,180 585,180" class="iso-top" fill="#B56F4C" stroke="#B56F4C" stroke-width="0.5" />
-              <polygon points="570,170 570,170 585,180 585,180 585,180 570,170" class="iso-left" fill="#2F302D" stroke="#454541" stroke-width="0.5" />
-              <polygon points="585,180 585,180 600,170 600,170 600,170 585,180" class="iso-right" fill="#232421" stroke="#454541" stroke-width="0.5" />
-            </g>
+          <!-- Stage 5 (80-100%): Illuminated Smart Tower & Vehicles -->
+          <g class="city-asset" data-x="650">
+            <!-- Smart City Tower -->
+            <rect x="630" y="42" width="40" height="96" fill="#232421" stroke="#B56F4C" stroke-width="1.5" rx="2" />
+            <line x1="650" y1="42" x2="650" y2="138" stroke="#D6C3A5" stroke-width="0.8" stroke-dasharray="3 1" />
+            <circle cx="650" cy="34" r="2.5" fill="#B56F4C" class="tower-beacon" />
+            <!-- Windows -->
+            <rect x="638" y="56" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="652" y="56" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="638" y="68" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="652" y="68" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="638" y="80" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="652" y="80" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="638" y="92" width="8" height="6" class="window-glow" fill="#454541" />
+            <rect x="652" y="92" width="8" height="6" class="window-glow" fill="#454541" />
           </g>
 
-          <!-- Planning Overlays & Routes (Activated 75-90%) -->
-          <g id="preloader-layer-overlays" opacity="0" stroke="#7A8C73" stroke-width="1" stroke-linecap="round" fill="none">
-            <!-- Environmental Buffer circle inside hologram -->
-            <circle cx="545" cy="190" r="75" stroke="#7A8C73" stroke-dasharray="4 3" />
-            <path d="M 545,190 L 595,245" stroke="#7A8C73" stroke-width="0.8" />
-            <text x="600" y="248" fill="#C9C2B8" font-family="monospace" font-size="7px">BUFFER 75m</text>
-            
-            <!-- Transit routes -->
-            <path d="M 380,120 C 500,160 560,90 680,150" stroke="#B56F4C" stroke-width="1.8" stroke-dasharray="8 5" />
-            <text x="390" y="115" fill="#B56F4C" font-family="monospace" font-size="7px">METRO L1</text>
+          <!-- Dynamic Vehicle Elements (Animate left to right on road) -->
+          <g id="preloader-vehicle-1" opacity="0">
+            <rect x="0" y="145" width="14" height="6" fill="#B56F4C" rx="1" />
+            <circle cx="3" cy="151.5" r="1.2" fill="#151515" />
+            <circle cx="11" cy="151.5" r="1.2" fill="#151515" />
           </g>
-
-          <!-- Satellite Scanner Sweep Beam (Activated 0-15%) -->
-          <g id="preloader-layer-scanner">
-            <!-- Sweep bar -->
-            <rect id="scanner-beam" x="-200" y="0" width="150" height="400" fill="url(#scan-gradient)" />
+          <g id="preloader-vehicle-2" opacity="0">
+            <rect x="0" y="149" width="12" height="6" fill="#D6C3A5" rx="1" />
+            <circle cx="3" cy="155.5" r="1.2" fill="#151515" />
+            <circle cx="9" cy="155.5" r="1.2" fill="#151515" />
           </g>
         </svg>
 
         <!-- Coordinate overlay numbers -->
-        <div class="visual-corner-data bottom-left">UTM Z44 // GRID_LOC_384</div>
-        <div class="visual-corner-data bottom-right">WGS84 EPSG:4326</div>
+        <div class="visual-corner-data bottom-left">L_ALIGN_OK // SCALE 1:500</div>
+        <div class="visual-corner-data bottom-right">EPSG:3857 PROJECTED</div>
       </div>
 
-      <!-- Premium Progress Bar -->
+      <!-- Premium Progress HUD (Road growth indicators) -->
       <div class="preloader-progress-group">
         <div class="preloader-percentage-hud">
-          <span class="hud-status" id="preloader-status">INITIALIZING SYSTEM...</span>
+          <span class="hud-status" id="preloader-status">Surveying the Site...</span>
           <span class="hud-percent" id="preloader-percent">0%</span>
         </div>
         <div class="preloader-progress-track">
+          <!-- We represent the load bar as a mini survey scale -->
           <div class="preloader-progress-bar-fill" id="preloader-progress-fill"></div>
         </div>
       </div>
 
-      <!-- Dark Glass Terminal Console -->
+      <!-- Rotating Command Panel -->
       <div class="preloader-terminal-container">
-        <div class="terminal-header">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
-          <span class="terminal-title">GEOSPATIAL PLANNING CLI</span>
-        </div>
-        <div class="terminal-body" id="preloader-terminal">
-          <!-- Injected sequentially via JS -->
+        <div class="terminal-body" style="height: 25px; overflow: hidden; text-align: center;">
+          <div class="terminal-line" style="justify-content: center; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent-sand);" id="preloader-console-line">
+            INITIALIZING URBAN WORKSPACE...
+          </div>
         </div>
       </div>
     </div>

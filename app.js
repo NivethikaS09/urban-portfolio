@@ -7,46 +7,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 0. Fullscreen Preloader Logic
+  // 0. Fullscreen Preloader Logic (Road Building Theme)
   // ==========================================
   const preloader = document.getElementById('preloader');
   const progressFill = document.getElementById('preloader-progress-fill');
   const percentText = document.getElementById('preloader-percent');
   const statusText = document.getElementById('preloader-status');
-  const terminal = document.getElementById('preloader-terminal');
-  const canvas = document.getElementById('preloader-canvas');
+  const consoleLine = document.getElementById('preloader-console-line');
+  const roadAsphalt = document.getElementById('road-asphalt');
+  const roadMarkings = document.getElementById('road-markings');
+  const assets = document.querySelectorAll('.city-asset');
+  const vehicle1 = document.getElementById('preloader-vehicle-1');
+  const vehicle2 = document.getElementById('preloader-vehicle-2');
   const particleContainer = document.getElementById('preloader-particles');
 
-  // GIS Story Stage Elements
-  const layerScanner = document.getElementById('preloader-layer-scanner');
-  const layerRoads = document.getElementById('preloader-layer-roads');
-  const layerParcels = document.getElementById('preloader-layer-parcels');
-  const layerHeatmap = document.getElementById('preloader-layer-heatmap');
-  const layerOverlays = document.getElementById('preloader-layer-overlays');
-  const isoBuildings = document.querySelectorAll('.iso-building');
-
-  // Terminal commands output config
-  const terminalCommands = [
-    "Loading GIS Modules...",
-    "Importing Spatial Database...",
-    "Reading GeoJSON...",
-    "Loading Shapefiles...",
-    "Initializing Urban Model...",
-    "Running Network Analysis...",
-    "Generating DEM...",
-    "Building Land Use Layers...",
-    "Loading Satellite Imagery...",
-    "Processing Transport Network...",
-    "Importing Planning Regulations...",
-    "Compiling Spatial Index...",
-    "Detecting Urban Blocks...",
-    "Computing Accessibility...",
-    "Building Smart City Framework...",
-    "Loading Environmental Layers...",
-    "Preparing Planning Dashboard...",
-    "Initializing Interactive Maps...",
-    "Connecting Spatial Services...",
-    "Finalizing Visualization..."
+  // Planning-related dynamic messages
+  const consoleMessages = [
+    "Initializing Planning Workspace...",
+    "Loading Spatial Database...",
+    "Importing GIS Layers...",
+    "Analyzing Land Use...",
+    "Building Road Network...",
+    "Generating Urban Blocks...",
+    "Designing Public Spaces...",
+    "Optimizing Accessibility...",
+    "Preparing Planning Models...",
+    "Launching Portfolio..."
   ];
 
   if (preloader) {
@@ -54,143 +40,106 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Generate floating HUD particles
     if (particleContainer) {
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 20; i++) {
         const p = document.createElement('div');
         p.className = 'preloader-particle';
         p.style.left = `${Math.random() * 100}vw`;
         p.style.top = `${Math.random() * 100}vh`;
         p.style.animationDelay = `${Math.random() * 5}s`;
-        p.style.animationDuration = `${5 + Math.random() * 6}s`;
+        p.style.animationDuration = `${6 + Math.random() * 6}s`;
         particleContainer.appendChild(p);
       }
     }
 
     let progress = 0;
-    let currentTermIndex = 0;
-    
-    // Config for isometric buildings base heights (setting transform-origin inline)
-    isoBuildings.forEach(building => {
-      const x = building.getAttribute('data-x');
-      const y = building.getAttribute('data-y');
-      building.style.transformOrigin = `${x}px ${y}px`;
-    });
 
     const statusStories = [
-      { max: 15, text: "Initializing Spatial Database..." },
-      { max: 30, text: "Loading Road Network..." },
-      { max: 45, text: "Processing Land Use Layers..." },
-      { max: 60, text: "Generating Urban Fabric..." },
-      { max: 75, text: "Running Spatial Analysis..." },
-      { max: 90, text: "Optimizing Urban Systems..." },
-      { max: 100, text: "Welcome Planner." }
+      { max: 20, text: "Surveying the Site..." },
+      { max: 40, text: "Designing Transport Network..." },
+      { max: 60, text: "Developing Urban Infrastructure..." },
+      { max: 80, text: "Integrating Sustainable Mobility..." },
+      { max: 100, text: "Finalizing Planning Framework..." }
     ];
 
     const updatePreloaderStage = (val) => {
-      // 1. Update status text stories
+      // 1. Update primary status text
       const stage = statusStories.find(s => val <= s.max);
       if (stage && statusText) {
-        statusText.textContent = stage.text.toUpperCase();
+        statusText.textContent = stage.text;
       }
 
-      // 2. Animate SVG layers depending on percentage threshold
-      if (val >= 15 && layerRoads) {
-        layerRoads.setAttribute('opacity', '1');
-        layerRoads.style.opacity = '1';
-        // Trigger path stroke dash offset drawing
-        layerRoads.querySelectorAll('.road-path').forEach(path => path.classList.add('active'));
-      }
-      
-      if (val >= 30 && layerParcels) {
-        layerParcels.setAttribute('opacity', '1');
-        layerParcels.style.opacity = '1';
-      }
-
-      if (val >= 45) {
-        isoBuildings.forEach((b, index) => {
-          setTimeout(() => {
-            b.classList.add('active');
-          }, index * 200); // Stagger building rise
-        });
-      }
-
-      if (val >= 60 && layerHeatmap) {
-        layerHeatmap.setAttribute('opacity', '1');
-        layerHeatmap.style.opacity = '1';
-      }
-
-      if (val >= 75 && layerOverlays) {
-        layerOverlays.setAttribute('opacity', '1');
-        layerOverlays.style.opacity = '1';
-      }
-
-      if (val >= 90 && canvas) {
-        canvas.style.transform = 'scale(0.95)';
-        canvas.style.transition = 'transform 2s ease-in-out';
-      }
-    };
-
-    const updateTerminal = (val) => {
-      if (!terminal) return;
-      
-      // Calculate how many terminal lines should be printed based on progress
-      const targetLines = Math.min(Math.floor((val / 100) * terminalCommands.length) + 1, terminalCommands.length);
-      
-      while (currentTermIndex < targetLines) {
-        const cmd = terminalCommands[currentTermIndex];
-        
-        // Mark previous lines as completed with checkmarks
-        const prevLines = terminal.querySelectorAll('.terminal-line');
-        if (prevLines.length > 0) {
-          const lastLine = prevLines[prevLines.length - 1];
-          const checkSpan = lastLine.querySelector('.term-status');
-          if (checkSpan) {
-            checkSpan.innerHTML = '<span class="term-check">✓</span>';
-          }
+      // 2. Animate Road Line Growth (Total path length is 700px)
+      const offset = 700 - (val / 100) * 700;
+      if (roadAsphalt) roadAsphalt.style.strokeDashoffset = offset;
+      if (roadMarkings) {
+        roadMarkings.style.strokeDashoffset = offset;
+        if (val > 15) {
+          roadMarkings.style.opacity = '0.8';
         }
+      }
+
+      // 3. Reveal city assets when the road extends past their coordinate
+      const roadFrontX = 50 + (val / 100) * 700;
+      assets.forEach(asset => {
+        const assetX = parseFloat(asset.getAttribute('data-x'));
+        if (roadFrontX >= assetX) {
+          asset.classList.add('active');
+          
+          // Light up streetlights
+          const lightGlow = asset.querySelector('.streetlight-glow');
+          if (lightGlow) lightGlow.classList.add('active');
+          
+          // Toggle traffic lights green
+          const trafficGreen = asset.querySelector('.traffic-light-green');
+          if (trafficGreen) trafficGreen.classList.add('active');
+        }
+      });
+
+      // 4. Windows light-up and vehicle movement (above 80%)
+      if (val >= 80) {
+        document.querySelectorAll('.window-glow').forEach(w => w.classList.add('active'));
         
-        // Print new line
-        const line = document.createElement('div');
-        line.className = 'terminal-line';
-        line.innerHTML = `<span class="term-status">[ ]</span> <span class="term-text">${cmd}</span>`;
-        terminal.appendChild(line);
-        
-        // Scroll terminal console
-        terminal.scrollTop = terminal.scrollHeight;
-        currentTermIndex++;
+        // Translate and reveal vehicles
+        if (vehicle1) {
+          vehicle1.setAttribute('opacity', '1');
+          vehicle1.style.opacity = '1';
+          const car1X = 50 + ((val - 80) / 20) * 620;
+          vehicle1.style.transform = `translateX(${car1X}px)`;
+        }
+        if (vehicle2) {
+          vehicle2.setAttribute('opacity', '1');
+          vehicle2.style.opacity = '1';
+          const car2X = 30 + ((val - 80) / 20) * 600;
+          vehicle2.style.transform = `translateX(${car2X}px)`;
+        }
+      }
+
+      // 5. Rotate rotating CLI console messages
+      if (consoleLine) {
+        const msgIndex = Math.min(Math.floor((val / 100) * consoleMessages.length), consoleMessages.length - 1);
+        consoleLine.textContent = consoleMessages[msgIndex].toUpperCase();
       }
     };
 
-    // Increments smoothly over ~6 seconds
+    // Increments smoothly over 4-5 seconds
     const interval = setInterval(() => {
-      // Add random small increments to keep it organic and smooth
-      progress += Math.floor(Math.random() * 2) + 1.5;
+      progress += Math.random() * 1.2 + 0.35; // Stochastically steps forward ~0.95% per 40ms tick
       
       if (progress >= 100) {
         progress = 100;
         clearInterval(interval);
         
-        // Finalize HUD & Terminal
+        // Final updates
         if (progressFill) progressFill.style.width = '100%';
         if (percentText) percentText.textContent = '100%';
         updatePreloaderStage(100);
-        updateTerminal(100);
         
-        // Check final checkmark in terminal
-        setTimeout(() => {
-          const prevLines = terminal.querySelectorAll('.terminal-line');
-          if (prevLines.length > 0) {
-            const lastLine = prevLines[prevLines.length - 1];
-            const checkSpan = lastLine.querySelector('.term-status');
-            if (checkSpan) checkSpan.innerHTML = '<span class="term-check">✓</span>';
-          }
-        }, 100);
-
-        // Zoom & Fade transition out
+        // Continuous camera dive/scale zoom reveal transition out
         setTimeout(() => {
           preloader.classList.add('fade-out');
           document.body.classList.remove('loading');
           
-          // Trigger entry reveals for the hero elements
+          // Trigger entry reveals for the homepage hero elements
           setTimeout(() => {
             preloader.style.display = 'none';
             const heroContent = document.querySelector('.hero-content');
@@ -203,9 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressFill) progressFill.style.width = `${progress}%`;
         if (percentText) percentText.textContent = `${Math.round(progress)}%`;
         updatePreloaderStage(progress);
-        updateTerminal(progress);
       }
-    }, 35); // Snappy 35ms loop (~2.3 seconds total load)
+    }, 40); // 40ms tick rate (~4.2 seconds total load)
   }
 
   // ==========================================
