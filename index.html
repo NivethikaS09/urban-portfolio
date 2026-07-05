@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nivethika Sivagnanaseelan | Urban Planner & GIS Analyst</title>
+  <meta name="description" content="Portfolio of Nivethika Sivagnanaseelan, Urban Planner, GIS & Spatial Analyst, and Urban Researcher. Specializing in sustainable land use, GIS mapping, and development planning.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="preloader-container">
+      <div class="preloader-graphic">
+        <svg viewBox="0 0 200 200" width="180" height="180" xmlns="http://www.w3.org/2000/svg" class="preloader-svg">
+          <!-- Grid mesh backdrop -->
+          <g stroke="rgba(214, 195, 165, 0.04)" stroke-width="0.5">
+            <line x1="0" y1="20" x2="200" y2="20" />
+            <line x1="0" y1="40" x2="200" y2="40" />
+            <line x1="0" y1="60" x2="200" y2="60" />
+            <line x1="0" y1="80" x2="200" y2="80" />
+            <line x1="0" y1="100" x2="200" y2="100" />
+            <line x1="0" y1="120" x2="200" y2="120" />
+            <line x1="0" y1="140" x2="200" y2="140" />
+            <line x1="0" y1="160" x2="200" y2="160" />
+            <line x1="0" y1="180" x2="200" y2="180" />
+            <line x1="20" y1="0" x2="20" y2="200" />
+            <line x1="40" y1="0" x2="40" y2="200" />
+            <line x1="60" y1="0" x2="60" y2="200" />
+            <line x1="80" y1="0" x2="80" y2="200" />
+            <line x1="100" y1="0" x2="100" y2="200" />
+            <line x1="120" y1="0" x2="120" y2="200" />
+            <line x1="140" y1="0" x2="140" y2="200" />
+            <line x1="160" y1="0" x2="160" y2="200" />
+            <line x1="180" y1="0" x2="180" y2="200" />
+          </g>
+
+          <!-- Topographic circles expanding -->
+          <circle cx="100" cy="120" r="70" fill="none" stroke="rgba(122, 140, 115, 0.15)" stroke-width="1" class="loader-topo" />
+          <circle cx="100" cy="120" r="45" fill="none" stroke="rgba(122, 140, 115, 0.25)" stroke-width="1.5" class="loader-topo delay-1" />
+
+          <!-- Urban Grid / Building lines drawing themselves -->
+          <!-- Building 1 (Left) -->
+          <path d="M 25,160 L 25,95 L 45,95 L 45,160" fill="none" stroke="#7A8C73" stroke-width="1.5" class="draw-line building-1" />
+          <!-- Building 2 (Center) -->
+          <path d="M 50,160 L 50,65 L 80,65 L 80,160" fill="none" stroke="#D6C3A5" stroke-width="1.5" class="draw-line building-2" />
+          <!-- Building 3 (Right) -->
+          <path d="M 85,160 L 85,110 L 105,110 L 105,160" fill="none" stroke="#B56F4C" stroke-width="1.5" class="draw-line building-3" />
+          <!-- Building 4 (Far Right) -->
+          <path d="M 110,160 L 110,85 L 125,85 L 125,160" fill="none" stroke="#7A8C73" stroke-width="1.5" class="draw-line building-4" />
+
+          <!-- Stylized Silhouette of a Female Planner holding/looking at a tablet/compass -->
+          <g class="planner-silhouette" stroke="#D6C3A5" stroke-width="1.5" fill="none">
+            <!-- Body Profile -->
+            <path d="M 130,160 C 130,132 138,124 148,124 C 153,124 155,122 155,116 C 155,110 151,106 158,106 C 165,106 167,110 167,116 C 167,122 171,124 176,124 C 186,124 195,132 195,160" class="draw-line planner-body" />
+            <!-- Hair Bun circle -->
+            <circle cx="150" cy="112" r="8" class="draw-line planner-hair" />
+            <!-- Glasses outline -->
+            <path d="M 158,114 L 164,114 M 160,111 L 160,117" class="draw-line planner-details" />
+            <!-- Tablet or clipboard path -->
+            <path d="M 120,142 L 140,132 L 146,150 L 126,160 Z" class="draw-line planner-tablet" />
+            <!-- Arm pointing or holding tablet -->
+            <path d="M 148,128 C 142,130 134,136 134,142" class="draw-line planner-arm" />
+          </g>
+
+          <!-- Ground line -->
+          <line x1="10" y1="160" x2="190" y2="160" stroke="#454541" stroke-width="2" />
+        </svg>
+      </div>
+      
+      <!-- Progress Bar & Labels -->
+      <div class="preloader-text-group">
+        <div class="preloader-status" id="preloader-status">MAPPING COORDINATES...</div>
+        <div class="preloader-percentage-container">
+          <div class="preloader-progress-bar">
+            <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
+          </div>
+          <span class="preloader-percent" id="preloader-percent">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Decorative Grid & Topography -->
+  <div class="bg-decor-grid"></div>
+  <svg class="bg-topography" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stylized Topographic Contour Lines -->
+    <path d="M-100,200 C150,150 300,300 450,220 C600,140 750,280 1100,200" fill="none" stroke="rgba(214, 195, 165, 0.03)" stroke-width="1.5" />
+    <path d="M-100,280 C180,240 330,380 490,300 C650,220 800,360 1100,280" fill="none" stroke="rgba(214, 195, 165, 0.03)" stroke-width="1.5" />
+    <path d="M-100,360 C210,330 360,460 530,380 C700,300 850,440 1100,360" fill="none" stroke="rgba(214, 195, 165, 0.03)" stroke-width="1.5" />
+    <path d="M-100,440 C240,420 390,540 570,460 C750,380 900,520 1100,440" fill="none" stroke="rgba(214, 195, 165, 0.03)" stroke-width="1.5" />
+    <path d="M-100,520 C270,510 420,620 610,540 C800,460 950,600 1100,520" fill="none" stroke="rgba(214, 195, 165, 0.03)" stroke-width="1.5" />
+  </svg>
+
+  <!-- Navigation Menu -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-circle"></span>
+        NIVETHIKA S.
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">What I Do</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="section-container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">Urban Planner & GIS Analyst</div>
+          <h1 class="hero-name">Nivethika Sivagnanaseelan</h1>
+          <p class="hero-subtitle">Development Planning • GIS & Spatial Analysis • Urban Research</p>
+          <p class="hero-intro">
+            I am an Urban Planner passionate about creating sustainable, resilient, and people-centered places through evidence-based planning, spatial analysis, and GIS technologies. My work combines planning principles, geospatial intelligence, and interdisciplinary collaboration to support informed decision-making and responsible urban development.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Explore My Projects</a>
+            <a href="#" class="btn btn-secondary" id="download-cv-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 4v12m0 0l-4-4m4 4l4-4" />
+              </svg>
+              Download CV
+            </a>
+            <a href="#contact" class="btn btn-text">Contact Me</a>
+          </div>
+        </div>
+        <div class="hero-image-container">
+          <div class="hero-image-frame">
+            <img src="profile.jpeg" alt="Nivethika Sivagnanaseelan" class="hero-profile-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Statistics & Core Bar -->
+  <section class="stats-section">
+    <div class="section-container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" data-target="3.85" data-decimals="2">0.00</div>
+          <div class="stat-label">CGPA (First Class Hons)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="4">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="10">0</div>
+          <div class="stat-label">Planning & Research Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-tagline">GIS • Planning • Research • Development</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about" class="about-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Urban Informatics & Planning</span>
+        <h2>Planning Better Places Through Data, Design, and Collaboration</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            As a First Class BSc (Hons) graduate in Urban Informatics and Planning from the University of Moratuwa, I specialize in urban planning, GIS, spatial analysis, and development coordination. My academic background and professional experience have enabled me to contribute to planning projects ranging from development assessments and site analysis to GIS mapping and research.
+          </p>
+          <p>
+            I believe successful planning integrates technical knowledge, community needs, and sustainable development principles to create places that improve quality of life. By linking geospatial intelligence with architectural design sensibilities, I translate complex spatial datasets into insights that shape urban forms.
+          </p>
+        </div>
+        <div class="about-quote-panel">
+          <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 21c3 0 7-1 7-8V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4c0 3.5-2.5 5.5-5 6.5M14 21c3 0 7-1 7-8V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4c0 3.5-2.5 5.5-5 6.5" />
+          </svg>
+          <blockquote class="planning-quote">
+            "Good planning goes beyond designing spaces—it creates opportunities, strengthens communities, and shapes sustainable environments. I believe that integrating planning knowledge with spatial technologies enables better decisions and more resilient cities."
+          </blockquote>
+          <cite class="quote-author">— Nivethika Sivagnanaseelan</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do Section -->
+  <section id="services" class="services-section">
+    <div class="section-container">
+      <div class="section-header centered">
+        <span class="section-tag">Areas of Expertise</span>
+        <h2>What I Do</h2>
+      </div>
+      <div class="services-grid">
+        <!-- Service Card 1 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <h3>Urban Planning</h3>
+          <p>Supporting sustainable land use, development planning, site assessments, and planning evaluations that promote balanced urban growth.</p>
+        </div>
+        <!-- Service Card 2 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+              <path d="M2 12h20" />
+            </svg>
+          </div>
+          <h3>GIS & Spatial Analysis</h3>
+          <p>Transforming spatial data into actionable insights through GIS mapping, geospatial analysis, and spatial visualization.</p>
+        </div>
+        <!-- Service Card 3 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3>Planning Research</h3>
+          <p>Conducting field research, stakeholder engagement, policy analysis, and evidence-based planning studies.</p>
+        </div>
+        <!-- Service Card 4 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3>Development Coordination</h3>
+          <p>Supporting multidisciplinary planning teams through project coordination, technical documentation, and development assessments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Professional Experience Section -->
+  <section id="experience" class="experience-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Professional Timeline</span>
+        <h2>Work Experience</h2>
+      </div>
+      
+      <div class="timeline">
+        <!-- Vertical Line -->
+        <div class="timeline-bar"></div>
+        
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-period">Current</span>
+              <h3 class="timeline-title">Freelance Planning & Design Support</h3>
+              <span class="timeline-org">Independent Projects</span>
+            </div>
+            <p class="timeline-description">
+              Developed planning concepts, AutoCAD drawings, SketchUp visualizations, landscape proposals, and presentation materials for complex planning and design projects.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-period">Internship</span>
+              <h3 class="timeline-title">Planning Intern</h3>
+              <span class="timeline-org">John Keells Properties</span>
+            </div>
+            <p class="timeline-description">
+              Supported planning and development projects through site assessments, planning reports, feasibility studies, and project coordination while working alongside multidisciplinary teams in Sri Lanka's private property development sector.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-period">Geospatial Work</span>
+              <h3 class="timeline-title">GIS & Spatial Mapping Specialist</h3>
+              <span class="timeline-org">Northern Province Infrastructure Consulting</span>
+            </div>
+            <p class="timeline-description">
+              Prepared thematic maps, conducted GIS analysis, and developed geospatial outputs supporting planning, environmental, agriculture, irrigation, fisheries, and infrastructure projects in the Northern Province.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-period">Research Translation</span>
+              <h3 class="timeline-title">Research Translation & Documentation</h3>
+              <span class="timeline-org">Multiple Agencies</span>
+            </div>
+            <p class="timeline-description">
+              Worked with organizations including USAID SCORE, Export Development Board (EDB), Circle Consultancy, and projects related to the Central Environmental Authority by translating and documenting technical reports and development studies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="section-container">
+      <div class="section-header centered">
+        <span class="section-tag">Case Studies</span>
+        <h2>Featured Projects</h2>
+      </div>
+      
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <div class="project-card">
+          <div class="project-img-wrapper">
+            <!-- Simulated Architectural Render via pure Styled CSS/SVG Grid -->
+            <div class="project-img-sim project-sim-jaffna">
+              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#232421" />
+                <g stroke="#454541" stroke-width="0.5">
+                  <line x1="0" y1="50" x2="400" y2="50" />
+                  <line x1="0" y1="100" x2="400" y2="100" />
+                  <line x1="0" y1="150" x2="400" y2="150" />
+                  <line x1="0" y1="200" x2="400" y2="200" />
+                  <line x1="80" y1="0" x2="80" y2="250" />
+                  <line x1="160" y1="0" x2="160" y2="250" />
+                  <line x1="240" y1="0" x2="240" y2="250" />
+                  <line x1="320" y1="0" x2="320" y2="250" />
+                </g>
+                <!-- Jaffna Abstract Silhouette & Cultural Geometry -->
+                <path d="M50,200 L120,130 L160,170 L250,90 L320,150 L370,110 L400,130 L400,250 L0,250 Z" fill="#B56F4C" fill-opacity="0.15" />
+                <path d="M0,250 Q100,180 200,220 T400,160" fill="none" stroke="#D6C3A5" stroke-width="2" />
+                <circle cx="250" cy="90" r="4" fill="#7A8C73" />
+                <circle cx="250" cy="90" r="12" fill="none" stroke="#7A8C73" stroke-width="0.5" />
+              </svg>
+            </div>
+            <div class="project-location">Jaffna</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Local Identity, Collective Memory & Culture in Post-War Urban Development</h3>
+            <p class="project-desc">
+              Examined the relationship between urban development and community identity through qualitative research, field surveys, interviews, and planning analysis to develop culturally sensitive planning recommendations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Project Card 2 -->
+        <div class="project-card">
+          <div class="project-img-wrapper">
+            <div class="project-img-sim project-sim-conservation">
+              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#232421" />
+                <!-- Topography & Slope Model representation -->
+                <path d="M -50,120 Q 50,60 150,140 T 350,110 T 450,80 L 450,250 L -50,250 Z" fill="#7A8C73" fill-opacity="0.15" />
+                <path d="M -50,160 Q 60,120 180,180 T 370,150 T 450,130 L 450,250 L -50,250 Z" fill="#7A8C73" fill-opacity="0.25" />
+                <path d="M -50,120 Q 50,60 150,140 T 350,110 T 450,80" fill="none" stroke="#D6C3A5" stroke-width="1.5" />
+                <path d="M -50,160 Q 60,120 180,180 T 370,150 T 450,130" fill="none" stroke="#D6C3A5" stroke-width="1.5" />
+                <circle cx="150" cy="140" r="5" fill="#B56F4C" />
+                <circle cx="350" cy="110" r="5" fill="#B56F4C" />
+              </svg>
+            </div>
+            <div class="project-location">Nuwara Eliya</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Heritage Conservation & Sustainable Development</h3>
+            <p class="project-desc">
+              Evaluated heritage conservation priorities through site assessments and spatial analysis while proposing sustainable planning strategies that balance preservation with future urban development.
+            </p>
+          </div>
+        </div>
+
+        <!-- Project Card 3 -->
+        <div class="project-card">
+          <div class="project-img-wrapper">
+            <div class="project-img-sim project-sim-conflict">
+              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#232421" />
+                <!-- Regional GIS Map Grid -->
+                <circle cx="200" cy="125" r="80" fill="none" stroke="#B56F4C" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="5 3" />
+                <circle cx="200" cy="125" r="120" fill="none" stroke="#B56F4C" stroke-width="0.5" stroke-opacity="0.2" />
+                <path d="M50,50 L350,200" stroke="#7A8C73" stroke-width="1.5" opacity="0.6" stroke-dasharray="8 4" />
+                <path d="M50,200 L350,50" stroke="#7A8C73" stroke-width="1.5" opacity="0.6" stroke-dasharray="8 4" />
+                <!-- Conflict hotspots marked -->
+                <circle cx="160" cy="100" r="8" fill="#B56F4C" fill-opacity="0.6" />
+                <circle cx="260" cy="140" r="12" fill="#B56F4C" fill-opacity="0.6" />
+                <circle cx="200" cy="70" r="10" fill="#B56F4C" fill-opacity="0.6" />
+              </svg>
+            </div>
+            <div class="project-location">Regional</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Human–Elephant Conflict Planning</h3>
+            <p class="project-desc">
+              A regional planning study investigating spatial patterns of human–elephant conflict, land use, settlement distribution, and environmental challenges to recommend sustainable planning interventions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Project Card 4 -->
+        <div class="project-card">
+          <div class="project-img-wrapper">
+            <div class="project-img-sim project-sim-traffic">
+              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#232421" />
+                <!-- Intersection & Computer Vision grid tracking -->
+                <line x1="200" y1="0" x2="200" y2="250" stroke="#454541" stroke-width="30" />
+                <line x1="0" y1="125" x2="400" y2="125" stroke="#454541" stroke-width="30" />
+                <!-- Vehicles/pedestrians bounding boxes -->
+                <rect x="190" y="50" width="20" height="35" fill="none" stroke="#D6C3A5" stroke-width="1.5" />
+                <text x="192" y="45" fill="#D6C3A5" font-family="monospace" font-size="8px">CAR 94%</text>
+                
+                <rect x="230" y="110" width="35" height="20" fill="none" stroke="#7A8C73" stroke-width="1.5" />
+                <text x="232" y="105" fill="#7A8C73" font-family="monospace" font-size="8px">BUS 97%</text>
+
+                <circle cx="150" cy="150" r="4" fill="#B56F4C" />
+                <text x="142" y="142" fill="#B56F4C" font-family="monospace" font-size="6px">PED</text>
+              </svg>
+            </div>
+            <div class="project-location">Systems</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Traffic Monitoring & Decision Support System</h3>
+            <p class="project-desc">
+              Developed a computer vision–based traffic monitoring system capable of analyzing pedestrian and vehicle movement patterns to support transport planning and evidence-based infrastructure decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Expertise (Skills) -->
+  <section id="skills" class="skills-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Competencies</span>
+        <h2>Technical Expertise</h2>
+      </div>
+      <div class="skills-grid">
+        <!-- Category 1 -->
+        <div class="skills-category-card">
+          <h3>Urban Planning</h3>
+          <ul class="skills-list">
+            <li>Development Planning</li>
+            <li>Land Use Planning</li>
+            <li>Site Assessment</li>
+            <li>Development Assessment</li>
+            <li>Sustainable Development</li>
+          </ul>
+        </div>
+        
+        <!-- Category 2 -->
+        <div class="skills-category-card">
+          <h3>GIS & Spatial Analytics</h3>
+          <ul class="skills-list">
+            <li>GIS Mapping</li>
+            <li>Spatial Analysis</li>
+            <li>Spatial Visualization</li>
+            <li>Remote Sensing</li>
+            <li>Geospatial Data Management</li>
+          </ul>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="skills-category-card">
+          <h3>Design Software</h3>
+          <ul class="skills-list">
+            <li>AutoCAD</li>
+            <li>SketchUp</li>
+            <li>QGIS</li>
+            <li>Microsoft Office</li>
+          </ul>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="skills-category-card">
+          <h3>Research & Policy</h3>
+          <ul class="skills-list">
+            <li>Field Surveys</li>
+            <li>Qualitative Research</li>
+            <li>Stakeholder Engagement</li>
+            <li>Planning Documentation</li>
+            <li>Technical Report Writing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education, Certifications & Achievements -->
+  <section id="education" class="edu-cert-section">
+    <div class="section-container">
+      <div class="edu-cert-grid">
+        
+        <!-- Education Column -->
+        <div class="edu-column">
+          <div class="column-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="column-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479L12 21l-6.825-3.943a12.083 12.083 0 01.665-6.479L12 14z" />
+            </svg>
+            <h2>Education</h2>
+          </div>
+          
+          <div class="edu-card">
+            <div class="edu-title-group">
+              <h3>BSc (Hons) Urban Informatics & Planning</h3>
+              <span class="edu-grade">CGPA 3.85</span>
+            </div>
+            <p class="edu-org">University of Moratuwa</p>
+            <p class="edu-honor">First Class Honours</p>
+            <div class="dean-list-badge">
+              <strong>Dean's List:</strong> L1S1 • L1S2 • L2S3 • L3S5 • L4S7
+            </div>
+          </div>
+          
+          <!-- Languages Panel -->
+          <div class="sub-column-card">
+            <h3>Languages</h3>
+            <div class="languages-grid">
+              <div class="lang-item">
+                <span class="lang-name">Tamil</span>
+                <span class="lang-level">Native</span>
+              </div>
+              <div class="lang-item">
+                <span class="lang-name">English</span>
+                <span class="lang-level">Fluent</span>
+              </div>
+              <div class="lang-item">
+                <span class="lang-name">Sinhala</span>
+                <span class="lang-level">Working Proficiency</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications & Awards Column -->
+        <div class="cert-column">
+          <div class="column-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="column-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+            <h2>Certifications & Awards</h2>
+          </div>
+          
+          <div class="cert-list">
+            <div class="cert-item">
+              <div class="cert-marker"></div>
+              <div class="cert-info">
+                <h4>Foundations of Project Management</h4>
+                <p class="cert-meta">Google Project Management Certificate</p>
+              </div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-marker"></div>
+              <div class="cert-info">
+                <h4>Project Scope & Schedule Management</h4>
+                <p class="cert-meta">Professional Certificate Program</p>
+              </div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-marker"></div>
+              <div class="cert-info">
+                <h4>Diploma in English</h4>
+                <p class="cert-meta">First Class Honors</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leadership & Volunteer -->
+          <div class="sub-column-card">
+            <h3>Leadership & Engagement</h3>
+            <ul class="bullet-list">
+              <li>Student Member – Institute of Town Planners Sri Lanka</li>
+              <li>Batch Representative – Semester 8, Dept. of Town & Country Planning</li>
+              <li>District-Level Netball Player & Inter-school Debate Competitor</li>
+              <li>Academic & Community Volunteer & Event Moderator</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="section-container">
+      <div class="contact-grid">
+        <!-- Contact Intro -->
+        <div class="contact-info">
+          <span class="section-tag">Get in Touch</span>
+          <h2>Let's Build Better Places Together</h2>
+          <p>
+            Whether you're looking for collaboration on planning projects, GIS analysis, research, or sustainable development initiatives, I'd be happy to connect. Let's make our urban environments resilient, healthy, and smart.
+          </p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="method-details">
+                <span>Email</span>
+                <strong><a href="mailto:nivethika.s@example.com">nivethika.s@example.com</a></strong>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </div>
+              <div class="method-details">
+                <span>LinkedIn</span>
+                <strong><a href="https://linkedin.com/in/nivethika-sivagnanaseelan" target="_blank" rel="noopener">linkedin.com/in/nivethika-sivagnanaseelan</a></strong>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div class="method-details">
+                <span>Phone / WhatsApp</span>
+                <strong><a href="tel:+94770000000">+94 77 000 0000</a></strong>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="method-details">
+                <span>Location</span>
+                <strong>Sri Lanka</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-panel">
+          <form id="portfolio-contact-form" action="#" method="POST">
+            <div class="form-group">
+              <label for="form-name">Name</label>
+              <input type="text" id="form-name" name="name" required placeholder="Your Name">
+            </div>
+            
+            <div class="form-group">
+              <label for="form-email">Email Address</label>
+              <input type="email" id="form-email" name="email" required placeholder="name@organization.com">
+            </div>
+
+            <div class="form-group">
+              <label for="form-subject">Subject</label>
+              <input type="text" id="form-subject" name="subject" placeholder="Project collaboration, consultation request...">
+            </div>
+
+            <div class="form-group">
+              <label for="form-message">Message</label>
+              <textarea id="form-message" name="message" rows="5" required placeholder="Describe your spatial mapping, urban research, or planning assessment project details..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <div id="form-status" class="form-status-message"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nivethika Sivagnanaseelan. All rights reserved.</p>
+        <p class="footer-credit">Designed in the Desert Urban architectural aesthetic.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script File -->
+  <script src="app.js"></script>
+</body>
+</html>
