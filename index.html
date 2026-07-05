@@ -18,209 +18,325 @@
 
   <!-- Cinematic Preloader Screen -->
   <div id="preloader">
-    <!-- Floating Digital Particles & Coordinate Labels -->
-    <div class="preloader-particles" id="preloader-particles"></div>
-    <div class="preloader-coords-hud">
-      <span class="hud-coords">UTM ZONE 44N</span>
-      <span class="hud-coords">ELEVATION: 18.2m</span>
-      <span class="hud-coords">REF_PT: 09°40'15"N / 80°01'24"E</span>
+    <!-- Floating background topography curves -->
+    <svg class="preloader-bg-topo" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-50,150 C120,90 280,240 450,170 C620,100 780,220 1050,140" fill="none" stroke="rgba(199, 181, 153, 0.04)" stroke-width="1.5" />
+      <path d="M-50,220 C140,160 300,320 480,230 C660,140 820,280 1050,210" fill="none" stroke="rgba(199, 181, 153, 0.04)" stroke-width="1.5" />
+      <path d="M-50,290 C160,230 320,400 510,290 C700,180 860,340 1050,280" fill="none" stroke="rgba(199, 181, 153, 0.04)" stroke-width="1.5" />
+      <path d="M-50,360 C180,300 340,480 540,350 C740,220 900,400 1050,350" fill="none" stroke="rgba(199, 181, 153, 0.04)" stroke-width="1.5" />
+    </svg>
+
+    <!-- Top Corner HUD Indicators -->
+    <div class="preloader-hud-coords">
+      <div>07° 00' 21.5" N</div>
+      <div>80° 12' 48.2" E</div>
+    </div>
+
+    <div class="preloader-hud-compass">
+      <div class="hud-compass-text">
+        <span>URBAN INTELLIGENCE</span>
+        <span>FOR BETTER CITIES</span>
+      </div>
+      <svg class="hud-compass-icon" viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="17" stroke="var(--accent-sand)" stroke-width="0.8" fill="none" stroke-opacity="0.3" />
+        <line x1="20" y1="3" x2="20" y2="37" stroke="var(--accent-sand)" stroke-width="0.5" stroke-opacity="0.2" />
+        <line x1="3" y1="20" x2="37" y2="20" stroke="var(--accent-sand)" stroke-width="0.5" stroke-opacity="0.2" />
+        <polygon points="20,7 24,20 20,17 16,20" fill="var(--accent-sand)" />
+        <polygon points="20,33 24,20 20,23 16,20" fill="var(--accent-sand)" opacity="0.4" />
+        <text x="20" y="6" font-size="5" fill="var(--accent-sand)" text-anchor="middle" font-family="sans-serif" font-weight="bold">N</text>
+      </svg>
     </div>
 
     <!-- Center HUD Display -->
     <div class="preloader-core">
-      <!-- Title Block -->
-      <div class="preloader-title-block">
+      <!-- Premium Interlocking Monogram Header -->
+      <div class="preloader-header">
+        <div class="preloader-monogram-container">
+          <svg class="preloader-monogram" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 14,14 L 10,14 L 10,46 L 14,46" stroke="var(--accent-sand)" stroke-width="1.5" fill="none" opacity="0.5" />
+            <path d="M 46,14 L 50,14 L 50,46 L 46,46" stroke="var(--accent-sand)" stroke-width="1.5" fill="none" opacity="0.5" />
+            <path d="M 21,21 L 21,39 M 21,21 L 39,39 M 39,21 L 39,39" stroke="var(--accent-sand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M 18,25 C 18,18 42,18 42,25 C 42,30 18,30 18,35 C 18,42 42,42 42,35" stroke="var(--accent-sand)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.85" />
+          </svg>
+        </div>
         <h1 class="preloader-title">NIVETHIKA S</h1>
-        <p class="preloader-subtitle">Urban Planner • GIS & Spatial Analyst • Development Planning</p>
+        <p class="preloader-subtitle">PLANNING PORTAL</p>
+        <div class="preloader-sub-roles">
+          <span>Urban Planner</span>
+          <span class="role-separator">|</span>
+          <span>GIS & Spatial Analyst</span>
+          <span class="role-separator">|</span>
+          <span>Development Planning</span>
+        </div>
       </div>
 
-      <!-- Main GIS Canvas / Visualization Area (Building the City) -->
+      <!-- Main GIS Canvas Container (Winding Road & City) -->
       <div class="preloader-visual-container">
-        <!-- Overlay HUD Reticle -->
         <div class="visual-reticle"></div>
         
-        <svg id="preloader-canvas" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
-          <!-- Radial gradient background -->
-          <defs>
-            <radialGradient id="visual-radial" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stop-color="#141513" stop-opacity="0.95" />
-              <stop offset="100%" stop-color="#0a0a09" stop-opacity="1" />
-            </radialGradient>
-            <!-- Streetlight glow -->
-            <radialGradient id="lamp-glow" cx="50%" cy="50%" r="40%">
-              <stop offset="0%" stop-color="#D6C3A5" stop-opacity="0.8" />
-              <stop offset="100%" stop-color="#D6C3A5" stop-opacity="0" />
-            </radialGradient>
-          </defs>
-
-          <!-- SVG Canvas Base Grid -->
-          <rect width="800" height="300" fill="url(#visual-radial)" />
-          
-          <!-- Topographic contour lines backdrop (Sage Green, low opacity) -->
-          <g stroke="#7A8C73" stroke-opacity="0.1" stroke-width="1" fill="none">
-            <path d="M -50,60 Q 150,20 350,70 T 850,50" />
-            <path d="M -50,110 Q 100,120 300,90 T 850,130" />
-            <path d="M -50,190 Q 200,170 450,210 T 850,180" />
-            <path d="M -50,240 Q 250,250 550,230 T 850,260" />
-          </g>
-          
-          <!-- GIS Grid coordinates -->
-          <g stroke="#454541" stroke-opacity="0.25" stroke-width="0.5" fill="none">
-            <line x1="100" y1="0" x2="100" y2="300" />
-            <line x1="200" y1="0" x2="200" y2="300" />
-            <line x1="300" y1="0" x2="300" y2="300" />
-            <line x1="400" y1="0" x2="400" y2="300" />
-            <line x1="500" y1="0" x2="500" y2="300" />
-            <line x1="600" y1="0" x2="600" y2="300" />
-            <line x1="700" y1="0" x2="700" y2="300" />
-            <line x1="0" y1="75" x2="800" y2="75" />
-            <line x1="0" y1="150" x2="800" y2="150" />
-            <line x1="0" y1="225" x2="800" y2="225" />
+        <svg id="preloader-canvas" viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg">
+          <!-- Canvas Grids -->
+          <g stroke="rgba(44, 45, 42, 0.25)" stroke-width="0.5" fill="none">
+            <line x1="100" y1="0" x2="100" y2="360" />
+            <line x1="200" y1="0" x2="200" y2="360" />
+            <line x1="300" y1="0" x2="300" y2="360" />
+            <line x1="400" y1="0" x2="400" y2="360" />
+            <line x1="500" y1="0" x2="500" y2="360" />
+            <line x1="600" y1="0" x2="600" y2="360" />
+            <line x1="700" y1="0" x2="700" y2="360" />
+            <line x1="800" y1="0" x2="800" y2="360" />
+            <line x1="900" y1="0" x2="900" y2="360" />
+            
+            <line x1="0" y1="60" x2="1000" y2="60" />
+            <line x1="0" y1="120" x2="1000" y2="120" />
+            <line x1="0" y1="180" x2="1000" y2="180" />
+            <line x1="0" y1="240" x2="1000" y2="240" />
+            <line x1="0" y1="300" x2="1000" y2="300" />
           </g>
 
-          <!-- The Pavement Asphalt -->
-          <path id="road-asphalt" d="M 50,150 L 750,150" stroke="#2F302D" stroke-width="20" stroke-linecap="round" fill="none" stroke-dasharray="700" stroke-dashoffset="700" />
-          <!-- Center Dash Markings -->
-          <path id="road-markings" d="M 50,150 L 750,150" stroke="#D6C3A5" stroke-width="1.2" stroke-dasharray="10 8" fill="none" stroke-dasharray="700" stroke-dashoffset="700" opacity="0" />
+          <!-- Topographic contour paths (Behind road) -->
+          <g stroke="var(--accent-sage)" stroke-opacity="0.08" stroke-width="0.8" fill="none">
+            <path d="M 50,180 Q 250,110 500,200 T 950,160" />
+            <path d="M 50,260 Q 250,190 500,280 T 950,240" />
+          </g>
+
+          <!-- Winding Road Asphalt & Markings -->
+          <path id="road-asphalt" d="M 50,230 C 150,280 200,160 300,190 C 400,220 460,300 560,280 C 660,260 700,180 800,200 C 900,220 940,240 980,240" fill="none" stroke="#161715" stroke-width="16" stroke-linecap="round" />
+          <path id="road-markings" d="M 50,230 C 150,280 200,160 300,190 C 400,220 460,300 560,280 C 660,260 700,180 800,200 C 900,220 940,240 980,240" fill="none" stroke="#c7b599" stroke-width="1" stroke-dasharray="8 6" opacity="0" />
 
           <!-- ==========================================
-               Urban Development Assets (Revealed dynamically)
+               Preloader Winding Milestones (0% - 100%)
                ========================================== -->
           
-          <!-- Stage 1 (0-20%): Survey points & contours -->
-          <g class="city-asset" data-x="110">
-            <circle cx="110" cy="150" r="5" fill="none" stroke="#B56F4C" stroke-width="1" />
-            <line x1="110" y1="135" x2="110" y2="165" stroke="#B56F4C" stroke-width="0.8" stroke-dasharray="2 2" />
-            <line x1="95" y1="150" x2="125" y2="150" stroke="#B56F4C" stroke-width="0.8" stroke-dasharray="2 2" />
-            <text x="115" y="132" fill="#B56F4C" font-family="monospace" font-size="7px">BM_492</text>
-          </g>
-          <g class="city-asset" data-x="160">
-            <polygon points="160,140 164,148 156,148" fill="none" stroke="#7A8C73" stroke-width="1" />
-            <text x="165" y="145" fill="#7A8C73" font-family="monospace" font-size="7px">STATION_01</text>
+          <!-- Milestone 0% -->
+          <g class="milestone" id="milestone-0">
+            <text x="80" y="45" class="milestone-percent">0%</text>
+            <text x="80" y="58" class="milestone-text">INITIALIZING</text>
+            <text x="80" y="68" class="milestone-text">SPATIAL DATA</text>
+            <line x1="80" y1="78" x2="80" y2="242" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="80" cy="242" r="3" class="milestone-dot" fill="var(--border-color)" />
           </g>
 
-          <!-- Stage 2 (20-40%): Sidewalk paths, Trees & Lights -->
-          <g class="city-asset" data-x="220">
-            <!-- Tree 1 -->
-            <path d="M 220,136 L 225,122 L 215,122 Z" fill="#7A8C73" fill-opacity="0.8" stroke="#7A8C73" stroke-width="0.5" />
-            <line x1="220" y1="136" x2="220" y2="140" stroke="#454541" stroke-width="1.2" />
+          <!-- Milestone 20% -->
+          <g class="milestone" id="milestone-20">
+            <text x="250" y="45" class="milestone-percent">20%</text>
+            <text x="250" y="58" class="milestone-text">LOADING</text>
+            <text x="250" y="68" class="milestone-text">BASE MAP</text>
+            <line x1="250" y1="78" x2="250" y2="183" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="250" cy="183" r="3" class="milestone-dot" fill="var(--border-color)" />
           </g>
-          <g class="city-asset" data-x="260">
-            <!-- Sidewalk detail -->
-            <line x1="250" y1="138" x2="290" y2="138" stroke="#454541" stroke-width="1.5" />
+
+          <!-- Milestone 40% -->
+          <g class="milestone" id="milestone-40">
+            <text x="430" y="45" class="milestone-percent">40%</text>
+            <text x="430" y="58" class="milestone-text">ANALYZING</text>
+            <text x="430" y="68" class="milestone-text">URBAN FABRIC</text>
+            <line x1="430" y1="78" x2="430" y2="228" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="430" cy="228" r="3" class="milestone-dot" fill="var(--border-color)" />
+          </g>
+
+          <!-- Milestone 60% -->
+          <g class="milestone" id="milestone-60">
+            <text x="600" y="45" class="milestone-percent">60%</text>
+            <text x="600" y="58" class="milestone-text">MODELING</text>
+            <text x="600" y="68" class="milestone-text">INFRASTRUCTURE</text>
+            <line x1="600" y1="78" x2="600" y2="276" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="600" cy="276" r="3" class="milestone-dot" fill="var(--border-color)" />
+          </g>
+
+          <!-- Milestone 80% -->
+          <g class="milestone" id="milestone-80">
+            <text x="770" y="45" class="milestone-percent">80%</text>
+            <text x="770" y="58" class="milestone-text">OPTIMIZING</text>
+            <text x="770" y="68" class="milestone-text">ENVIRONMENT</text>
+            <line x1="770" y1="78" x2="770" y2="197" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="770" cy="197" r="3" class="milestone-dot" fill="var(--border-color)" />
+          </g>
+
+          <!-- Milestone 100% -->
+          <g class="milestone" id="milestone-100">
+            <text x="940" y="45" class="milestone-percent">100%</text>
+            <text x="940" y="58" class="milestone-text">BUILDING</text>
+            <text x="940" y="68" class="milestone-text">BETTER FUTURES</text>
+            <line x1="940" y1="78" x2="940" y2="242" class="milestone-line" stroke="var(--border-color)" stroke-width="0.8" stroke-dasharray="3 3" />
+            <circle cx="940" cy="242" r="3" class="milestone-dot" fill="var(--border-color)" />
+          </g>
+
+          <!-- ==========================================
+               City Assets (Revealed dynamically)
+               ========================================== -->
+          
+          <!-- Stage 1 (0-20%): Contour dunes -->
+          <g class="city-asset" data-progress="10">
+            <polygon points="50,230 110,210 160,235 150,260 50,230" fill="var(--accent-terracotta)" fill-opacity="0.1" stroke="none" />
+            <path d="M 60,233 C 80,225 110,225 130,238" fill="none" stroke="var(--accent-terracotta)" stroke-width="0.5" stroke-opacity="0.3" />
+          </g>
+          <g class="city-asset" data-progress="15">
+            <polygon points="120,245 170,220 220,230 200,265 120,245" fill="var(--accent-terracotta)" fill-opacity="0.08" stroke="none" />
+          </g>
+
+          <!-- Stage 2 (20-40%): Blueprint parcel grids -->
+          <g class="city-asset" data-progress="25">
+            <polygon points="260,165 285,155 315,165 290,175" fill="none" stroke="var(--accent-sage)" stroke-width="0.6" stroke-opacity="0.4" stroke-dasharray="2 1" />
+            <line x1="285" y1="155" x2="285" y2="185" stroke="var(--accent-sage)" stroke-width="0.5" stroke-opacity="0.3" />
+            <circle cx="285" cy="155" r="1.5" fill="var(--accent-sage)" opacity="0.6" />
+          </g>
+          <g class="city-asset" data-progress="35">
+            <polygon points="310,185 330,175 350,185 330,195" fill="none" stroke="var(--accent-sand)" stroke-width="0.6" stroke-opacity="0.4" />
+          </g>
+
+          <!-- Stage 3 (40-60%): Small houses & trees -->
+          <g class="city-asset" data-progress="45">
+            <!-- Left Face -->
+            <polygon points="440,210 448,214 448,222 440,218" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.4" />
+            <!-- Right Face -->
+            <polygon points="448,214 456,210 456,218 448,222" fill="#141513" stroke="#2c2d2a" stroke-width="0.4" />
+            <!-- Roof -->
+            <polygon points="440,210 448,214 456,210 448,206" fill="var(--accent-sand)" fill-opacity="0.4" />
+          </g>
+          <g class="city-asset" data-progress="50">
+            <!-- Tiny cone tree -->
+            <polygon points="475,214 478,204 472,204" fill="var(--accent-sage)" fill-opacity="0.75" />
+            <line x1="475" y1="214" x2="475" y2="219" stroke="#2c2d2a" stroke-width="0.8" />
+          </g>
+          <g class="city-asset" data-progress="55">
+            <!-- House 2 -->
+            <polygon points="505,255 513,259 513,267 505,263" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.4" />
+            <polygon points="513,259 521,255 521,263 513,267" fill="#141513" stroke="#2c2d2a" stroke-width="0.4" />
+            <polygon points="505,255 513,259 521,255 513,251" fill="var(--accent-sand)" fill-opacity="0.4" />
+          </g>
+
+          <!-- Stage 4 (60-80%): Office structures & streetlights -->
+          <g class="city-asset" data-progress="65">
+            <!-- Medium Building -->
+            <polygon points="630,225 645,232 645,202 630,195" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="645,232 660,225 660,195 645,202" fill="#141513" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="630,195 645,202 660,195 645,188" fill="var(--accent-sand)" fill-opacity="0.5" />
+            <!-- Windows -->
+            <polygon points="634,204 640,207 640,211 634,208" fill="#a35d3a" class="window-glow" />
+            <polygon points="634,213 640,216 640,220 634,217" fill="#a35d3a" class="window-glow" />
+            <polygon points="649,207 655,204 655,208 649,211" fill="#a35d3a" class="window-glow" />
+            <polygon points="649,216 655,213 655,217 649,220" fill="#a35d3a" class="window-glow" />
+          </g>
+          <g class="city-asset" data-progress="70">
             <!-- Streetlight -->
-            <path d="M 270,138 L 270,115 Q 270,110 275,110 L 280,110" stroke="#D6C3A5" stroke-width="1" fill="none" />
-            <circle cx="280" cy="112" r="3" fill="url(#lamp-glow)" class="streetlight-glow" opacity="0" />
-            <circle cx="280" cy="110" r="1" fill="#F4EFE6" />
+            <path d="M 680,248 L 680,225 Q 680,220 686,220 L 692,220" stroke="var(--accent-sand)" stroke-width="0.8" fill="none" />
+            <circle cx="692" cy="222" r="3" fill="var(--accent-sand)" class="streetlight-glow" opacity="0" />
+            <circle cx="692" cy="220" r="0.8" fill="#f2ede4" />
           </g>
-          <g class="city-asset" data-x="310">
-            <!-- Tree 2 -->
-            <circle cx="310" cy="125" r="5.5" fill="#7A8C73" fill-opacity="0.75" />
-            <line x1="310" y1="130" x2="310" y2="140" stroke="#454541" stroke-width="1.2" />
-          </g>
-
-          <!-- Stage 3 (40-60%): Buildings & Green Spaces -->
-          <g class="city-asset" data-x="370">
-            <!-- Residential block -->
-            <rect x="355" y="92" width="28" height="46" fill="#232421" stroke="#B56F4C" stroke-width="1.2" rx="1" />
-            <line x1="363" y1="102" x2="375" y2="102" stroke="#454541" stroke-width="1" />
-            <line x1="363" y1="114" x2="375" y2="114" stroke="#454541" stroke-width="1" />
-            <line x1="363" y1="126" x2="375" y2="126" stroke="#454541" stroke-width="1" />
-          </g>
-          <g class="city-asset" data-x="415">
-            <!-- Small Public Park -->
-            <rect x="400" y="125" width="30" height="13" fill="#7A8C73" fill-opacity="0.25" stroke="#7A8C73" stroke-width="0.8" rx="1" />
-            <rect x="408" y="127" width="14" height="5" fill="none" stroke="#D6C3A5" stroke-width="0.6" />
-          </g>
-          <g class="city-asset" data-x="465">
-            <!-- Commercial building -->
-            <rect x="450" y="74" width="30" height="64" fill="#232421" stroke="#D6C3A5" stroke-width="1.2" rx="1.5" />
-            <!-- Windows -->
-            <rect x="456" y="84" width="6" height="5" class="window-glow" fill="#454541" />
-            <rect x="468" y="84" width="6" height="5" class="window-glow" fill="#454541" />
-            <rect x="456" y="96" width="6" height="5" class="window-glow" fill="#454541" />
-            <rect x="468" y="96" width="6" height="5" class="window-glow" fill="#454541" />
-            <rect x="456" y="108" width="6" height="5" class="window-glow" fill="#454541" />
-            <rect x="468" y="108" width="6" height="5" class="window-glow" fill="#454541" />
+          <g class="city-asset" data-progress="75">
+            <!-- Commercial block 2 -->
+            <polygon points="710,210 722,216 722,192 710,186" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="722,216 734,210 734,186 722,192" fill="#141513" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="710,186 722,192 734,186 722,180" fill="var(--accent-sand)" fill-opacity="0.5" />
           </g>
 
-          <!-- Stage 4 (60-80%): Signals, Crosswalks & Cycle path -->
-          <g class="city-asset" data-x="510">
-            <!-- Zebra Crossing -->
-            <line x1="495" y1="138" x2="525" y2="138" stroke="#454541" stroke-width="1.5" />
-            <rect x="500" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
-            <rect x="506" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
-            <rect x="512" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
-            <rect x="518" y="140" width="3" height="20" fill="#F4EFE6" fill-opacity="0.8" />
+          <!-- Stage 5 (80-100%): Skyscrapers & Smart Tower -->
+          <g class="city-asset" data-progress="85">
+            <!-- Tall Skyscraper -->
+            <polygon points="810,185 825,192 825,122 810,115" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="825,192 840,185 840,115 825,122" fill="#141513" stroke="#2c2d2a" stroke-width="0.5" />
+            <polygon points="810,115 825,122 840,115 825,108" fill="var(--accent-sand)" fill-opacity="0.5" />
+            <!-- Glowing Windows -->
+            <polygon points="814,124 820,127 820,132 814,129" fill="#a35d3a" class="window-glow" />
+            <polygon points="814,136 820,139 820,144 814,141" fill="#a35d3a" class="window-glow" />
+            <polygon points="814,148 820,151 820,156 814,153" fill="#a35d3a" class="window-glow" />
+            <polygon points="829,127 835,124 835,129 829,132" fill="#a35d3a" class="window-glow" />
+            <polygon points="829,139 835,136 835,141 829,144" fill="#a35d3a" class="window-glow" />
+            <polygon points="829,151 835,148 835,153 829,156" fill="#a35d3a" class="window-glow" />
           </g>
-          <g class="city-asset" data-x="545">
-            <!-- Traffic Light -->
-            <line x1="545" y1="138" x2="545" y2="116" stroke="#D6C3A5" stroke-width="1" />
-            <rect x="542" y="104" width="6" height="12" fill="#2F302D" rx="0.5" />
-            <circle cx="545" cy="107" r="1" fill="#7A8C73" class="traffic-light-green" opacity="0.3" />
-            <circle cx="545" cy="110" r="1" fill="#454541" />
-            <circle cx="545" cy="113" r="1" fill="#454541" />
-          </g>
-          <g class="city-asset" data-x="585">
-            <!-- Cycle line details -->
-            <line x1="570" y1="138" x2="600" y2="138" stroke="#7A8C73" stroke-width="1" stroke-dasharray="2 2" />
-            <circle cx="585" cy="126" r="5" fill="#7A8C73" fill-opacity="0.7" />
-            <line x1="585" y1="131" x2="585" y2="140" stroke="#454541" stroke-width="1" />
-          </g>
-
-          <!-- Stage 5 (80-100%): Illuminated Smart Tower & Vehicles -->
-          <g class="city-asset" data-x="650">
+          
+          <g class="city-asset" data-progress="90">
             <!-- Smart City Tower -->
-            <rect x="630" y="42" width="40" height="96" fill="#232421" stroke="#B56F4C" stroke-width="1.5" rx="2" />
-            <line x1="650" y1="42" x2="650" y2="138" stroke="#D6C3A5" stroke-width="0.8" stroke-dasharray="3 1" />
-            <circle cx="650" cy="34" r="2.5" fill="#B56F4C" class="tower-beacon" />
-            <!-- Windows -->
-            <rect x="638" y="56" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="652" y="56" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="638" y="68" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="652" y="68" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="638" y="80" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="652" y="80" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="638" y="92" width="8" height="6" class="window-glow" fill="#454541" />
-            <rect x="652" y="92" width="8" height="6" class="window-glow" fill="#454541" />
+            <polygon points="880,185 900,195 900,100 880,90" fill="#1c1d1a" stroke="#2c2d2a" stroke-width="0.6" />
+            <polygon points="900,195 920,185 920,100 900,110" fill="#141513" stroke="#2c2d2a" stroke-width="0.6" />
+            <polygon points="880,90 900,100 920,90 900,80" fill="var(--accent-sand)" fill-opacity="0.6" />
+            <line x1="900" y1="80" x2="900" y2="60" stroke="var(--accent-sand)" stroke-width="1" />
+            <circle cx="900" cy="60" r="2.5" fill="var(--accent-terracotta)" class="tower-beacon" />
+            <!-- Smart Tower Windows -->
+            <polygon points="885,110 892,113 892,117 885,114" fill="#a35d3a" class="window-glow" />
+            <polygon points="885,124 892,127 892,131 885,128" fill="#a35d3a" class="window-glow" />
+            <polygon points="885,138 892,141 892,145 885,142" fill="#a35d3a" class="window-glow" />
+            <polygon points="905,113 912,110 912,114 905,117" fill="#a35d3a" class="window-glow" />
+            <polygon points="905,127 912,124 912,128 905,131" fill="#a35d3a" class="window-glow" />
+            <polygon points="905,141 912,138 912,142 905,145" fill="#a35d3a" class="window-glow" />
           </g>
 
-          <!-- Dynamic Vehicle Elements (Animate left to right on road) -->
+          <g class="city-asset" data-progress="95">
+            <!-- Roundabout monument circle -->
+            <ellipse cx="940" cy="242" rx="14" ry="7" fill="none" stroke="var(--accent-sage)" stroke-width="0.8" stroke-dasharray="3 2" />
+            <line x1="940" y1="230" x2="940" y2="242" stroke="var(--accent-sand)" stroke-width="1" />
+            <circle cx="940" cy="230" r="1.5" fill="var(--accent-sand)" />
+          </g>
+
+          <!-- Dynamic Vehicle Elements -->
           <g id="preloader-vehicle-1" opacity="0">
-            <rect x="0" y="145" width="14" height="6" fill="#B56F4C" rx="1" />
-            <circle cx="3" cy="151.5" r="1.2" fill="#151515" />
-            <circle cx="11" cy="151.5" r="1.2" fill="#151515" />
+            <circle cx="0" cy="0" r="3.5" fill="var(--accent-terracotta)" filter="drop-shadow(0 0 2px var(--accent-terracotta))" />
+            <circle cx="0" cy="0" r="1" fill="#f2ede4" />
           </g>
           <g id="preloader-vehicle-2" opacity="0">
-            <rect x="0" y="149" width="12" height="6" fill="#D6C3A5" rx="1" />
-            <circle cx="3" cy="155.5" r="1.2" fill="#151515" />
-            <circle cx="9" cy="155.5" r="1.2" fill="#151515" />
+            <circle cx="0" cy="0" r="2.5" fill="var(--accent-sand)" filter="drop-shadow(0 0 1px var(--accent-sand))" />
           </g>
         </svg>
 
-        <!-- Coordinate overlay numbers -->
         <div class="visual-corner-data bottom-left">L_ALIGN_OK // SCALE 1:500</div>
         <div class="visual-corner-data bottom-right">EPSG:3857 PROJECTED</div>
       </div>
 
-      <!-- Premium Progress HUD (Road growth indicators) -->
-      <div class="preloader-progress-group">
-        <div class="preloader-percentage-hud">
-          <span class="hud-status" id="preloader-status">Surveying the Site...</span>
-          <span class="hud-percent" id="preloader-percent">0%</span>
-        </div>
-        <div class="preloader-progress-track">
-          <!-- We represent the load bar as a mini survey scale -->
-          <div class="preloader-progress-bar-fill" id="preloader-progress-fill"></div>
-        </div>
+      <!-- Real-time load percent indicator -->
+      <div class="preloader-progress-text-block">
+        <div class="hud-big-percent" id="preloader-percent">0%</div>
+        <div class="hud-big-status" id="preloader-status">INITIALIZING WORKSPACE...</div>
       </div>
 
-      <!-- Rotating Command Panel -->
-      <div class="preloader-terminal-container">
-        <div class="terminal-body" style="height: 25px; overflow: hidden; text-align: center;">
-          <div class="terminal-line" style="justify-content: center; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent-sand);" id="preloader-console-line">
-            INITIALIZING URBAN WORKSPACE...
+      <!-- Bottom HUD Console Control Panel -->
+      <div class="preloader-bottom-hud">
+        <!-- Left quick actions icons -->
+        <div class="hud-quick-toggles">
+          <div class="toggle-icon active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" />
+            </svg>
           </div>
+          <div class="toggle-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <div class="toggle-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Center terminal rectangular logs list -->
+        <div class="preloader-terminal">
+          <div class="terminal-log-line">&gt; Connecting to Spatial Database <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Importing GIS Layers <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Generating Digital Elevation Model <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Analyzing Road Network <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Processing Land Use Data <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Modeling Urban Growth <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Running Accessibility Analysis <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Building 3D City Model <span class="status-tag pending">[ PENDING ]</span></div>
+          <div class="terminal-log-line">&gt; Finalizing Urban Visualization <span class="status-tag pending">[ PENDING ]</span></div>
+        </div>
+
+        <!-- Right decoration node network -->
+        <div class="hud-node-decor">
+          <svg class="node-network-svg" viewBox="0 0 100 60">
+            <circle cx="20" cy="30" r="2" fill="var(--accent-sand)" />
+            <circle cx="50" cy="15" r="2.5" fill="var(--accent-terracotta)" />
+            <circle cx="50" cy="45" r="2" fill="var(--accent-sand)" />
+            <circle cx="80" cy="30" r="3" fill="var(--accent-sage)" />
+            <line x1="20" y1="30" x2="50" y2="15" stroke="var(--border-color)" stroke-width="0.5" />
+            <line x1="20" y1="30" x2="50" y2="45" stroke="var(--border-color)" stroke-width="0.5" />
+            <line x1="50" y1="15" x2="80" y2="30" stroke="var(--border-color)" stroke-width="0.5" />
+            <line x1="50" y1="45" x2="80" y2="30" stroke="var(--border-color)" stroke-width="0.5" />
+            <line x1="50" y1="15" x2="50" y2="45" stroke="var(--border-color)" stroke-width="0.5" stroke-dasharray="1 1" />
+          </svg>
+          <div class="hud-node-marker">++</div>
         </div>
       </div>
     </div>
