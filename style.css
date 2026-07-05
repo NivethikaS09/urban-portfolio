@@ -4,15 +4,15 @@
 
 /* Design Tokens & Variables */
 :root {
-  --bg-primary: #151515;
-  --bg-secondary: #232421;
-  --card-bg: #2F302D;
-  --accent-sand: #D6C3A5;
-  --accent-terracotta: #B56F4C;
-  --accent-sage: #7A8C73;
-  --text-heading: #F4EFE6;
-  --text-body: #C9C2B8;
-  --border-color: #454541;
+  --bg-primary: #0a0a09;
+  --bg-secondary: #141513;
+  --card-bg: #1c1d1a;
+  --accent-sand: #c7b599;
+  --accent-terracotta: #a35d3a;
+  --accent-sage: #677860;
+  --text-heading: #f2ede4;
+  --text-body: #a8a298;
+  --border-color: #2c2d2a;
   
   --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
