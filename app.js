@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Increment progress loops
     const loadInterval = setInterval(() => {
-      progress += Math.random() * 1.4 + 0.5; // Smooth progression steps
+      progress += Math.random() * 2.8 + 1.5; // Faster snappy steps
       
       if (progress >= 100) {
         progress = 100;
@@ -170,12 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (heroContent) heroContent.classList.add('active');
             if (heroImg) heroImg.classList.add('active');
           }, 1000);
-        }, 1100);
+        }, 1000);
       } else {
         if (percentText) percentText.textContent = `${Math.round(progress)}%`;
         updatePreloaderStage(progress);
       }
-    }, 45); // ~3.5 seconds sequence length
+    }, 32); // Snappy ~1.2 seconds sequence length
   }
 
   // ==========================================
