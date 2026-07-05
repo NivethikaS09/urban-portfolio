@@ -1245,7 +1245,7 @@ body.loading {
 
 #preloader.fade-out {
   opacity: 0;
-  transform: scale(1.1);
+  transform: scale(1.3) translateX(-10%);
   visibility: hidden;
 }
 
