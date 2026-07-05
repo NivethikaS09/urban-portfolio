@@ -748,6 +748,66 @@ button, input, textarea {
   line-height: 1.6;
 }
 
+.project-card:nth-child(5) {
+  grid-column: span 2;
+}
+
+.project-docs-list {
+  margin-top: 24px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 18px;
+}
+
+.docs-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-sand);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.docs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.doc-link-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-body);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.doc-link-badge:hover {
+  background-color: var(--accent-sage);
+  color: var(--bg-primary);
+  border-color: var(--accent-sage);
+}
+
+.doc-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+}
+
+@media (max-width: 768px) {
+  .project-card:nth-child(5) {
+    grid-column: span 1;
+  }
+}
+
 /* Skills/Expertise - Professional Toolkit */
 .skills-section {
   background-color: var(--bg-primary);
