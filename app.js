@@ -399,4 +399,36 @@ CONTACT:
       }, 1500);
     });
   }
+
+  // ==========================================
+  // 8. Competencies Toolkit Tab Switcher
+  // ==========================================
+  const tabButtons = document.querySelectorAll('.skills-tab-btn');
+  const tabContents = document.querySelectorAll('.skills-tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      tabButtons.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+
+      // Hide all tab contents
+      tabContents.forEach(content => content.classList.remove('active'));
+      // Show clicked tab content
+      const tabId = `tab-content-${btn.getAttribute('data-tab')}`;
+      const targetContent = document.getElementById(tabId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+        
+        // Force browser to recalculate layout so progress bar scale transitions replay
+        const fills = targetContent.querySelectorAll('.skill-progress-fill');
+        fills.forEach(fill => {
+          fill.style.transform = 'scaleX(0)';
+          fill.getBoundingClientRect(); // Trigger layout reflow
+          fill.style.transform = '';
+        });
+      }
+    });
+  });
 });
