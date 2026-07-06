@@ -2309,92 +2309,116 @@ body.modal-open {
   background-color: var(--bg-secondary);
 }
 
-.gallery-grid {
+.albums-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
   margin-top: 50px;
 }
 
-.gallery-item {
-  position: relative;
-  border-radius: var(--radius-md);
+.album-card {
+  background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 16/10;
-  background-color: var(--bg-primary);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
 }
 
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.gallery-item:hover {
-  transform: translateY(-4px);
+.album-card:hover {
+  transform: translateY(-6px);
   border-color: var(--accent-sand);
   box-shadow: var(--shadow-md);
 }
 
-.gallery-item:hover img {
+.album-cover-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.album-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.album-card:hover .album-cover {
   transform: scale(1.05);
 }
 
-.gallery-overlay {
+.album-count-badge {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(13, 14, 12, 0.9) 20%, rgba(13, 14, 12, 0.2) 80%);
+  bottom: 16px;
+  right: 16px;
+  background-color: rgba(20, 21, 19, 0.85);
+  border: 1px solid var(--border-color);
+  color: var(--accent-sand);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  backdrop-filter: blur(4px);
+}
+
+.album-info {
+  padding: 28px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
-}
-
-.gallery-zoom-icon {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: rgba(214, 195, 165, 0.9);
-  color: #141513;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: scale(0.8);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.gallery-item:hover .gallery-zoom-icon {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.gallery-title {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--text-heading);
-  margin-bottom: 2px;
-}
-
-.gallery-desc {
-  font-size: 0.7rem;
-  color: var(--accent-sand);
+.album-category {
   font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-sand);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.album-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--text-heading);
+}
+
+.album-info p {
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.album-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-sand);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+  margin-top: auto;
+}
+
+.album-view-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.album-card:hover .album-view-btn svg {
+  transform: translateX(4px);
 }
 
 /* Lightbox Modal Overlay */
@@ -2504,28 +2528,19 @@ body.modal-open {
 }
 
 /* Responsive Grid columns mapping */
-@media (max-width: 1200px) {
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 992px) {
+  .albums-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
   .lightbox-prev-btn {
     left: 10px;
   }
   .lightbox-next-btn {
     right: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
   }
 }
 

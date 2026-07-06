@@ -652,9 +652,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // Gallery Lightbox Functionality
+  // Gallery Lightbox Functionality (Multi-Album Support)
   // ==========================================================================
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const albumCards = document.querySelectorAll('.album-card');
   const lightboxOverlay = document.getElementById('gallery-lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxTitle = document.getElementById('lightbox-title');
@@ -664,48 +664,57 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxNext = document.getElementById('lightbox-next');
 
   let currentGalleryIndex = 0;
-  const galleryData = Array.from(galleryItems).map(item => ({
-    src: item.getAttribute('data-src'),
-    title: item.getAttribute('data-title'),
-    desc: item.getAttribute('data-desc')
-  }));
+  let activeGalleryData = [];
 
-  function openLightbox(index) {
+  function openLightbox(albumData, index) {
+    activeGalleryData = albumData;
     currentGalleryIndex = index;
     updateLightbox();
-    lightboxOverlay.classList.add('active');
+    if (lightboxOverlay) lightboxOverlay.classList.add('active');
     document.body.style.overflow = 'hidden'; // Disable page scrolling
   }
 
   function closeLightbox() {
-    lightboxOverlay.classList.remove('active');
+    if (lightboxOverlay) lightboxOverlay.classList.remove('active');
     document.body.style.overflow = ''; // Re-enable page scrolling
   }
 
   function updateLightbox() {
-    const item = galleryData[currentGalleryIndex];
+    if (activeGalleryData.length === 0) return;
+    const item = activeGalleryData[currentGalleryIndex];
     if (lightboxImg) {
       lightboxImg.src = item.src;
       lightboxImg.alt = item.title;
     }
     if (lightboxTitle) lightboxTitle.textContent = item.title;
-    if (lightboxCount) lightboxCount.textContent = `${currentGalleryIndex + 1} of ${galleryData.length}`;
+    if (lightboxCount) lightboxCount.textContent = `${currentGalleryIndex + 1} of ${activeGalleryData.length}`;
   }
 
   function showNextImage() {
-    currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+    if (activeGalleryData.length === 0) return;
+    currentGalleryIndex = (currentGalleryIndex + 1) % activeGalleryData.length;
     updateLightbox();
   }
 
+  // Prev image
   function showPrevImage() {
-    currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+    if (activeGalleryData.length === 0) return;
+    currentGalleryIndex = (currentGalleryIndex - 1 + activeGalleryData.length) % activeGalleryData.length;
     updateLightbox();
   }
 
-  // Event Listeners
-  galleryItems.forEach((item, idx) => {
-    item.addEventListener('click', () => {
-      openLightbox(idx);
+  // Event Listeners for Album Cards
+  albumCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const itemElements = card.querySelectorAll('.album-item');
+      const albumData = Array.from(itemElements).map(el => ({
+        src: el.getAttribute('data-src'),
+        title: el.getAttribute('data-title'),
+        desc: el.getAttribute('data-desc') || ""
+      }));
+      if (albumData.length > 0) {
+        openLightbox(albumData, 0);
+      }
     });
   });
 
