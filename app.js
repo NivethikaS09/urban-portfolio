@@ -339,66 +339,9 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => revealObserver.observe(el));
 
   // ==========================================
-  // 6. CV Download Handler (Generate summary text file)
+  // 6. CV Download Handler (Standard PDF Download via Link)
   // ==========================================
-  const downloadBtn = document.getElementById('download-cv-btn');
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const cvText = `
-NIVETHIKA SIVAGNANASEELAN
-Urban Planner | GIS & Spatial Analyst | Development Planning
-Moratuwa, Sri Lanka
-------------------------------------------------------------
-
-SUMMARY:
-First Class BSc (Hons) graduate in Urban Informatics and Planning from the 
-University of Moratuwa. Specializes in urban planning, GIS, spatial analysis, 
-and development coordination. Passionate about creating sustainable, 
-resilient, and people-centered places.
-
-EDUCATION:
-University of Moratuwa
-BSc (Hons) Urban Informatics & Planning
-- CGPA: 3.85
-- First Class Honours
-- Dean's List (L1S1, L1S2, L2S3, L3S5, L4S7)
-
-TECHNICAL EXPERTISE:
-- Urban Planning: Development Planning, Land Use Planning, Site Assessment
-- GIS & Spatial Analytics: GIS Mapping, Spatial Analysis, Remote Sensing
-- Design Software: AutoCAD, SketchUp, QGIS
-- Research: Field Surveys, Qualitative Research, Technical Report Writing
-
-PROFESSIONAL EXPERIENCE:
-- Planning Intern, John Keells Properties
-- Freelance Planning & Design Support
-- GIS & Spatial Mapping Specialist, Northern Province Consulting
-- Research Translation & Documentation, USAID SCORE & CEA
-
-CERTIFICATIONS:
-- Foundations of Project Management (Google Professional Certificate)
-- Project Scope & Schedule Management
-- Diploma in English (First Class Honors)
-
-CONTACT:
-- Email: nivethika.s@example.com
-- LinkedIn: linkedin.com/in/nivethika-sivagnanaseelan
-- Phone: +94 77 000 0000
-      `.trim();
-      
-      const blob = new Blob([cvText], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const tempLink = document.createElement('a');
-      tempLink.href = url;
-      tempLink.download = 'Nivethika_Sivagnanaseelan_CV_Summary.txt';
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-      URL.revokeObjectURL(url);
-    });
-  }
+  // Handled natively by browser link attributes in index.html
 
   // ==========================================
   // 7. Contact Form Simulation

@@ -2077,8 +2077,11 @@ body.modal-open {
   filter: brightness(0.95) contrast(1.02);
   transition: filter 0.3s ease;
   /* CSS hack to fix browser sub-pixel gap rendering bug at fractional zooms */
-  margin: -0.5px !important;
-  padding: 0.5px !important;
+  margin: -1px !important;
+  padding: 1px !important;
+  outline: 1px solid transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Fix grid lines boundary bugs by overriding global img properties */
