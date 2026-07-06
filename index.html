@@ -23,7 +23,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Local Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=19">
+  <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 
@@ -876,6 +876,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                       A0 Waterfront Site Plan (PDF)
+                    </a>
+                    <a href="#gallery" class="doc-link-badge view-gallery-btn" data-album="gateway" style="border-color: var(--accent-sand); color: var(--accent-sand);">
+                      <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      View 3D Renders Gallery
                     </a>
                   </div>
                 </div>
@@ -1844,7 +1850,39 @@
       </div>
 
       <div class="albums-grid">
-        <!-- Album 1: Urban Park (Freelance Project) -->
+        <!-- Album 1: Urban Gateway (Moratuwa) -->
+        <div class="album-card" data-album="gateway">
+          <div class="album-cover-wrapper">
+            <img src="documents/gallery/gateway_1.jpg" alt="Urban Gateway Moratuwa Gallery" class="album-cover">
+            <div class="album-count-badge">9 Renders</div>
+          </div>
+          <div class="album-info">
+            <span class="album-category">Academic Project</span>
+            <h3>Urban Gateway (Moratuwa)</h3>
+            <p>3D architectural visualizations, streetscapes, coastal waterfront renders, and pedestrian master plans for the Egoda Uyana transit node.</p>
+            <span class="album-view-btn">
+              View Showcase
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </div>
+          
+          <!-- Hidden album images data -->
+          <div class="album-images-data" style="display: none;">
+            <div class="album-item" data-src="documents/gallery/gateway_1.jpg" data-title="Egoda Uyana Transit Hub View"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_2.jpg" data-title="Waterfront Corridor Overview"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_3.jpg" data-title="Pedestrian Promenade Render"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_4.jpg" data-title="Coastal Streetscape Integration"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_5.jpg" data-title="Bolgoda Lake Waterfront Experience"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_6.jpg" data-title="Timber Identity Spine Node"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_7.jpg" data-title="Master Corridor View"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_8.jpg" data-title="Transit Gateway Intersection"></div>
+            <div class="album-item" data-src="documents/gallery/gateway_9.jpg" data-title="Urban Gateway Perspective View"></div>
+          </div>
+        </div>
+
+        <!-- Album 2: Urban Park (Freelance Project) -->
         <div class="album-card">
           <div class="album-cover-wrapper">
             <img src="documents/gallery/park_1.jpg" alt="Urban Park Gallery" class="album-cover">
@@ -2222,6 +2260,6 @@
   </div>
 
   <!-- Script File -->
-  <script src="app.js?v=19"></script>
+  <script src="app.js?v=20"></script>
 </body>
 </html>

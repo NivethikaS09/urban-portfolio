@@ -470,6 +470,23 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal();
       }
     });
+
+    // Event listener to connect project modal click to gallery album lightbox
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.view-gallery-btn');
+      if (btn) {
+        e.preventDefault();
+        closeModal();
+        const albumId = btn.getAttribute('data-album');
+        const albumCard = document.querySelector(`.album-card[data-album="${albumId}"]`);
+        if (albumCard) {
+          setTimeout(() => {
+            albumCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            albumCard.click();
+          }, 300);
+        }
+      }
+    });
   }
 
   // ==========================================
