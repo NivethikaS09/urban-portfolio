@@ -1072,30 +1072,75 @@
         <!-- Project Card 4 -->
         <div class="project-card">
           <div class="project-img-wrapper">
-            <div class="project-img-sim project-sim-traffic">
-              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="250" fill="#232421" />
-                <!-- Intersection & Computer Vision grid tracking -->
-                <line x1="200" y1="0" x2="200" y2="250" stroke="#454541" stroke-width="30" />
-                <line x1="0" y1="125" x2="400" y2="125" stroke="#454541" stroke-width="30" />
-                <!-- Vehicles/pedestrians bounding boxes -->
-                <rect x="190" y="50" width="20" height="35" fill="none" stroke="#D6C3A5" stroke-width="1.5" />
-                <text x="192" y="45" fill="#D6C3A5" font-family="monospace" font-size="8px">CAR 94%</text>
-                
-                <rect x="230" y="110" width="35" height="20" fill="none" stroke="#7A8C73" stroke-width="1.5" />
-                <text x="232" y="105" fill="#7A8C73" font-family="monospace" font-size="8px">BUS 97%</text>
- 
-                <circle cx="150" cy="150" r="4" fill="#B56F4C" />
-                <text x="142" y="142" fill="#B56F4C" font-family="monospace" font-size="6px">PED</text>
-              </svg>
-            </div>
+            <video autoplay loop muted playsinline class="project-img-sim" style="object-fit: cover; display: block;">
+              <source src="documents/group_f_cover.mp4" type="video/mp4">
+            </video>
             <div class="project-location">Systems</div>
           </div>
           <div class="project-content">
             <h3 class="project-title">Traffic Monitoring & Decision Support System</h3>
             <p class="project-desc">
-              Developed a computer vision–based traffic monitoring system capable of analyzing pedestrian and vehicle movement patterns to support transport planning and evidence-based infrastructure decisions.
+              Developed an AI-driven traffic analysis workflow using YOLO object detection to automate vehicle classification, counting, and traffic monitoring from video datasets. The project integrated machine learning outputs with urban transportation analysis.
             </p>
+            <button class="btn-toggle-details">View Details <span class="arrow">↓</span></button>
+            
+            <div class="project-details-expand">
+              <!-- Mapped Scope, Analysis Period, Primary Sensors Grid -->
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 15px; margin-bottom: 16px; background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-sm);">
+                <div>
+                  <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-body); font-weight: 600;">Mapped Scope:</span>
+                  <strong style="color: var(--text-heading); font-size: 0.95rem;">Traffic Corridor</strong>
+                </div>
+                <div>
+                  <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-body); font-weight: 600;">Analysis Period:</span>
+                  <strong style="color: var(--text-heading); font-size: 0.95rem;">January 2025</strong>
+                </div>
+                <div style="grid-column: span 2;">
+                  <span style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-body); font-weight: 600;">Primary Sensors:</span>
+                  <strong style="color: var(--text-heading); font-size: 0.95rem; line-height: 1.4; display: block; margin-top: 2px;">Traffic video footage, SQL database records, Vehicle classification outputs</strong>
+                </div>
+              </div>
+
+              <div style="margin-top: 16px;">
+                <span style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--accent-sand); margin-bottom: 8px;">Key Outcomes & Findings:</span>
+                <ul class="bullet-list" style="margin-bottom: 0;">
+                  <li>Automated vehicle detection and classification.</li>
+                  <li>Created a structured SQL database for traffic observations.</li>
+                  <li>Produced traffic pattern visualizations and dashboards.</li>
+                  <li>Demonstrated the application of AI for evidence-based transport planning.</li>
+                </ul>
+              </div>
+
+              <div style="margin-top: 20px;">
+                <span style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--accent-sand); margin-bottom: 8px;">Technologies & Libraries:</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Python</span>
+                  <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">YOLO</span>
+                  <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">SQL Database</span>
+                  <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">R Programming</span>
+                  <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">OpenCV</span>
+                </div>
+              </div>
+
+              <div class="project-docs-list" style="margin-top: 20px;">
+                <span class="docs-label">Project Artifacts & Media:</span>
+                <div class="docs-grid">
+                  <a href="documents/yolo_traffic_sample.mp4" target="_blank" class="doc-link-badge">
+                    <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Watch Sample Video
+                  </a>
+                  <a href="documents/Group_F_Presentation.pptx" target="_blank" class="doc-link-badge">
+                    <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Group F Presentation
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
