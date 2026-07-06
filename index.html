@@ -8,6 +8,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
   
   <!-- Last updated: 2026-07-06 -->
   <!-- Google Fonts -->
@@ -21,7 +23,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Local Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
 
@@ -61,12 +63,7 @@
       <!-- Premium Interlocking Monogram Header -->
       <div class="preloader-header">
         <div class="preloader-monogram-container">
-          <svg class="preloader-monogram" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 14,14 L 10,14 L 10,46 L 14,46" stroke="var(--accent-sand)" stroke-width="1.5" fill="none" opacity="0.5" />
-            <path d="M 46,14 L 50,14 L 50,46 L 46,46" stroke="var(--accent-sand)" stroke-width="1.5" fill="none" opacity="0.5" />
-            <path d="M 21,21 L 21,39 M 21,21 L 39,39 M 39,21 L 39,39" stroke="var(--accent-sand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-            <path d="M 18,25 C 18,18 42,18 42,25 C 42,30 18,30 18,35 C 18,42 42,42 42,35" stroke="var(--accent-sand)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.85" />
-          </svg>
+          <img src="images/logo.png" alt="Nivethika Sivagnanaseelan Logo" class="preloader-monogram" style="object-fit: contain;">
         </div>
         <h1 class="preloader-title">NIVETHIKA S</h1>
         <p class="preloader-subtitle">PLANNING PORTAL</p>
@@ -366,12 +363,13 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">
-        <span class="logo-circle"></span>
+        <img src="images/logo.png" alt="Nivethika Sivagnanaseelan Logo" class="logo-image">
         NIVETHIKA S.
       </a>
       <nav class="nav-menu" id="nav-menu">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">What I Do</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#gallery" class="nav-link">Gallery</a>
@@ -2220,6 +2218,6 @@
   </div>
 
   <!-- Script File -->
-  <script src="app.js?v=15"></script>
+  <script src="app.js?v=16"></script>
 </body>
 </html>

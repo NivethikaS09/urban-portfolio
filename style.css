@@ -166,6 +166,13 @@ button, input, textarea {
   display: inline-block;
 }
 
+.logo-image {
+  height: 28px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+}
+
 .nav-menu {
   display: flex;
   gap: 32px;
@@ -1505,8 +1512,37 @@ body.loading {
   max-width: 1024px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
   z-index: 3;
+  max-height: 96vh;
+}
+
+@media (max-height: 850px) {
+  .preloader-core {
+    gap: 12px;
+    max-width: 750px;
+  }
+  .preloader-monogram {
+    width: 36px;
+    height: 36px;
+  }
+  .preloader-title {
+    font-size: 1.5rem;
+  }
+  .preloader-terminal {
+    padding: 10px 16px;
+    gap: 4px 16px;
+  }
+}
+
+@media (max-height: 650px) {
+  .preloader-core {
+    max-width: 600px;
+    gap: 8px;
+  }
+  .preloader-terminal {
+    display: none !important;
+  }
 }
 
 /* Header style with logo monogram */
