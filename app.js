@@ -453,4 +453,30 @@ CONTACT:
       }
     });
   });
+
+  // ==========================================
+  // 9. Project Card Details Toggle (Expand/Collapse)
+  // ==========================================
+  const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.project-card');
+      const expandArea = card.querySelector('.project-details-expand');
+      
+      if (!card || !expandArea) return;
+
+      const isExpanded = card.classList.toggle('expanded');
+      
+      if (isExpanded) {
+        btn.innerHTML = 'Collapse Details <span class="arrow">↑</span>';
+        expandArea.style.maxHeight = expandArea.scrollHeight + 'px';
+        expandArea.style.opacity = '1';
+      } else {
+        btn.innerHTML = 'View Details <span class="arrow">↓</span>';
+        expandArea.style.maxHeight = '0';
+        expandArea.style.opacity = '0';
+      }
+    });
+  });
 });
