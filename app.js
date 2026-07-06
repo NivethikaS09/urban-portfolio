@@ -615,6 +615,14 @@ CONTACT:
         category: "Remote Sensing",
         tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
         cardIndex: 5 // Dambulla is Card 6 (index 5)
+      },
+      {
+        coords: [9.6800, 80.0070], // Jaffna Coastline
+        title: "Land Use Change Detection in the Coastal Areas of Jaffna Using Remote Sensing",
+        zone: "Jaffna Coastal Areas",
+        category: "Remote Sensing",
+        tags: ["Landsat", "ArcMap", "Change Detection"],
+        cardIndex: 6 // Jaffna Coastline is Card 7 (index 6)
       }
     ];
 
