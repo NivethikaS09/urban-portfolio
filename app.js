@@ -1,6 +1,6 @@
 /**
  * app.js
- * JavaScript logic for Nivethika Sivagnanaseelan's Desert Urban Portfolio
+ * JavaScript logic for Nivethika Sivagnanaseelan's Urban Planning Portfolio
  * Controls scroll navigation, interactive GIS simulator, stats counters, and contact form simulation.
  */
 
