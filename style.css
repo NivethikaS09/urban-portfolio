@@ -579,14 +579,14 @@ button, input, textarea {
 }
 
 .service-card h3 {
-  font-size: 1.15rem;
-  margin-bottom: 12px;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
   font-family: var(--font-heading);
 }
 
 .service-card p {
   color: var(--text-body);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   line-height: 1.45;
 }
 
