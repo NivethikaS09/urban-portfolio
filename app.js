@@ -623,6 +623,14 @@ CONTACT:
         category: "Remote Sensing",
         tags: ["Landsat", "ArcMap", "Change Detection"],
         cardIndex: 6 // Jaffna Coastline is Card 7 (index 6)
+      },
+      {
+        coords: [6.9150, 79.8800], // Colombo Air Quality
+        title: "Air Quality Modelling and PM2.5 Analysis for Colombo Using Python",
+        zone: "Colombo Municipal Area",
+        category: "Environmental Modelling",
+        tags: ["Python", "Colab", "PM2.5 Analysis"],
+        cardIndex: 7 // Air Quality is Card 8 (index 7)
       }
     ];
 

@@ -18,7 +18,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Local Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -1705,6 +1705,140 @@
             </div>
           </div>
         </div>
+
+        <!-- Project Card 8 -->
+        <div class="project-card">
+          <div class="project-img-wrapper">
+            <div class="project-img-sim project-sim-airquality" style="background-color: #141513; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+              <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                <!-- Background mesh grid -->
+                <rect width="400" height="250" fill="#141513" />
+                <line x1="50" y1="50" x2="350" y2="50" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="50" y1="100" x2="350" y2="100" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="50" y1="150" x2="350" y2="150" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="50" y1="200" x2="350" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="100" y1="50" x2="100" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="175" y1="50" x2="175" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="250" y1="50" x2="250" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                <line x1="325" y1="50" x2="325" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                
+                <!-- PM2.5 Time Series curve with peak spikes -->
+                <path d="M50,180 L80,170 L110,140 L140,165 L170,120 L200,60 L230,130 L260,110 L290,145 L320,80 L350,180" fill="none" stroke="#fca311" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                
+                <!-- Glowing points on peak spikes -->
+                <circle cx="200" cy="60" r="4" fill="#ff4d4d" />
+                <circle cx="200" cy="60" r="10" fill="none" stroke="#ff4d4d" stroke-width="1.5" opacity="0.6" />
+                <circle cx="320" cy="80" r="3.5" fill="#fca311" />
+                
+                <!-- Text label and units -->
+                <text x="50" y="40" font-family="'JetBrains Mono', monospace" font-size="9" fill="#7a8c73">PM2.5 (µg/m³)</text>
+                <text x="210" y="55" font-family="'JetBrains Mono', monospace" font-size="8" fill="#ff4d4d" font-weight="700">>500 Peak</text>
+                <text x="350" y="215" font-family="'JetBrains Mono', monospace" font-size="8" fill="#7a8c73" text-anchor="end">2018 Timeline</text>
+              </svg>
+            </div>
+            <div class="project-location">Colombo</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Air Quality Modelling and PM2.5 Analysis for Colombo Using Python</h3>
+            <p class="project-desc">
+              Developed a Python-based air quality modelling workflow to analyze hourly and daily PM2.5 concentrations in Colombo using 2018 historical air quality data. The project involved data preprocessing...
+            </p>
+            <div class="project-card-tags">
+              <span class="project-card-tag">Python</span>
+              <span class="project-card-tag">Google Colab</span>
+              <span class="project-card-tag">Time Series</span>
+              <span class="project-card-tag more">+2 more</span>
+            </div>
+
+            <!-- Modal Data Source -->
+            <div class="project-details-data" style="display: none;">
+              <div class="modal-media-wrapper">
+                <div class="project-img-sim project-sim-airquality" style="height: 100%;">
+                  <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; object-fit: cover;">
+                    <rect width="400" height="250" fill="#141513" />
+                    <line x1="50" y1="50" x2="350" y2="50" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="50" y1="150" x2="350" y2="150" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="100" y1="50" x2="100" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="175" y1="50" x2="175" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="250" y1="50" x2="250" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                    <line x1="325" y1="50" x2="325" y2="200" stroke="#2c2d2a" stroke-width="0.5" />
+                    <path d="M50,180 L80,170 L110,140 L140,165 L170,120 L200,60 L230,130 L260,110 L290,145 L320,80 L350,180" fill="none" stroke="#fca311" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="200" cy="60" r="4" fill="#ff4d4d" /><circle cx="200" cy="60" r="10" fill="none" stroke="#ff4d4d" stroke-width="1.5" opacity="0.6" /><circle cx="320" cy="80" r="3.5" fill="#fca311" />
+                    <text x="50" y="40" font-family="'JetBrains Mono', monospace" font-size="9" fill="#7a8c73">PM2.5 (µg/m³)</text>
+                    <text x="210" y="55" font-family="'JetBrains Mono', monospace" font-size="8" fill="#ff4d4d" font-weight="700">>500 Peak</text>
+                    <text x="350" y="215" font-family="'JetBrains Mono', monospace" font-size="8" fill="#7a8c73" text-anchor="end">2018 Timeline</text>
+                  </svg>
+                </div>
+              </div>
+              <span class="modal-location">Colombo</span>
+              <div class="modal-main-content">
+                <h2 class="modal-title">Air Quality Modelling and PM2.5 Analysis for Colombo Using Python</h2>
+                <div class="modal-meta-grid">
+                  <div class="modal-meta-item">
+                    <span>Mapped Scope</span>
+                    <strong>Colombo Municipal Area</strong>
+                  </div>
+                  <div class="modal-meta-item">
+                    <span>Analysis Period</span>
+                    <strong>2018 Historical Data</strong>
+                  </div>
+                  <div class="modal-meta-item">
+                    <span>Primary Sensors</span>
+                    <strong>Air Quality Monitoring Station Records</strong>
+                  </div>
+                </div>
+                <hr class="modal-divider" />
+                <div class="modal-section">
+                  <h3>Analysis Framework</h3>
+                  <p>Developed a Python-based air quality modelling workflow to analyze hourly and daily PM2.5 concentrations in Colombo using 2018 historical air quality data. The project involved data preprocessing, statistical analysis, time-series visualization, and trend interpretation to understand urban air pollution patterns and support environmental planning decisions.</p>
+                </div>
+
+                <div class="modal-section">
+                  <h3>Key Outcomes & Findings</h3>
+                  <ul class="bullet-list">
+                    <li>Developed a complete workflow for retrieving, cleaning, and analyzing 2018 PM2.5 air quality data for Colombo.</li>
+                    <li>Identified significant temporal fluctuations in PM2.5 concentrations, with several extreme pollution events exceeding 500 µg/m³.</li>
+                    <li>Performed exploratory data analysis (EDA) and generated hourly and daily PM2.5 trend visualizations.</li>
+                    <li>Applied time-series resampling to produce daily average pollutant concentrations for improved trend analysis.</li>
+                    <li>Highlighted vehicular traffic, industrial activities, construction dust, and biomass burning as the dominant contributors to Colombo's air pollution.</li>
+                    <li>Demonstrated how data-driven air quality modelling can support pollution hotspot identification and evidence-based environmental planning.</li>
+                  </ul>
+                </div>
+                <div class="modal-section">
+                  <h3>Technologies & Analysis</h3>
+                  <div class="modal-tags-grid">
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Python</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Google Colab</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Time Series Analysis</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Exploratory Data Analysis (EDA)</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Data Preprocessing</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">PM2.5 Air Quality Analysis</span>
+                    <span class="dean-list-badge" style="padding: 6px 12px; font-size: 0.8rem; margin: 0;">Environmental Modelling</span>
+                  </div>
+                </div>
+                <div class="modal-section modal-links-section">
+                  <h3>Project Documents</h3>
+                  <div class="docs-grid">
+                    <a href="documents/Colombo_Air_Quality_Assessment.pdf" target="_blank" class="doc-link-badge">
+                      <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Air Quality Assessment Report
+                    </a>
+                    <a href="documents/AirqualityModelling_Colombo_Research.pdf" target="_blank" class="doc-link-badge">
+                      <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Air Quality Modelling Study
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1846,6 +1980,6 @@
   </div>
 
   <!-- Script File -->
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
