@@ -455,28 +455,65 @@ CONTACT:
   });
 
   // ==========================================
-  // 9. Project Card Details Toggle (Expand/Collapse)
+  // 9. Project Card Details Lightbox Modal Logic
   // ==========================================
-  const toggleButtons = document.querySelectorAll('.btn-toggle-details');
+  const projectCards = document.querySelectorAll('.project-card');
+  const modal = document.getElementById('project-modal');
+  const modalBody = document.getElementById('project-modal-body');
+  const modalClose = document.getElementById('project-modal-close');
 
-  toggleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.project-card');
-      const expandArea = card.querySelector('.project-details-expand');
+  if (projectCards.length && modal && modalBody && modalClose) {
+    projectCards.forEach(card => {
+      card.style.cursor = 'pointer';
       
-      if (!card || !expandArea) return;
+      card.addEventListener('click', (e) => {
+        // Prevent click if clicking a direct link or badge inside the card
+        if (e.target.closest('a') || e.target.closest('button')) {
+          return;
+        }
 
-      const isExpanded = card.classList.toggle('expanded');
+        const dataSrc = card.querySelector('.project-details-data');
+        if (!dataSrc) return;
+        
+        // Inject content
+        modalBody.innerHTML = dataSrc.innerHTML;
+        
+        // Open modal
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // If there is a video in the modal, make sure it starts playing
+        const video = modalBody.querySelector('video');
+        if (video) {
+          video.play().catch(err => console.log("Video auto-play failed", err));
+        }
+      });
+    });
+
+    const closeModal = () => {
+      modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
       
-      if (isExpanded) {
-        btn.innerHTML = 'Collapse Details <span class="arrow">↑</span>';
-        expandArea.style.maxHeight = expandArea.scrollHeight + 'px';
-        expandArea.style.opacity = '1';
-      } else {
-        btn.innerHTML = 'View Details <span class="arrow">↓</span>';
-        expandArea.style.maxHeight = '0';
-        expandArea.style.opacity = '0';
+      // Stop any playing video
+      const video = modalBody.querySelector('video');
+      if (video) {
+        video.pause();
+      }
+      modalBody.innerHTML = '';
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
       }
     });
-  });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
 });
