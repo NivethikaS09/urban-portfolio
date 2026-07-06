@@ -556,51 +556,51 @@ document.addEventListener('DOMContentLoaded', () => {
         cardIndex: 2
       },
       {
-        coords: [7.8602, 80.6516], // Dambulla (Card 4)
-        title: "Land Use/Land Cover Classification of Dambulla DSD",
-        zone: "Dambulla Divisional Secretariat Division",
-        category: "Remote Sensing",
-        tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
-        cardIndex: 3
-      },
-      {
-        coords: [9.6800, 80.0070], // Jaffna Coastal Change (Card 5)
-        title: "Land Use Change Detection in the Coastal Areas of Jaffna Using Remote Sensing",
-        zone: "Jaffna Coastal Areas",
-        category: "Remote Sensing",
-        tags: ["Landsat", "ArcMap", "Change Detection"],
-        cardIndex: 4
-      },
-      {
-        coords: [7.8731, 80.7718], // National Center (Card 6)
+        coords: [7.8731, 80.7718], // National Center / Wild Elephant (Card 4)
         title: "Mitigating Human–Elephant Conflict Through Sustainable Wild Elephant Tourism",
         zone: "Sri Lanka (National Scale Study)",
         category: "Regional Planning",
         tags: ["Wildlife Tourism", "Policy", "CBT Models"],
-        cardIndex: 5
+        cardIndex: 3
       },
       {
-        coords: [6.9271, 79.8612], // Colombo Traffic (Card 8)
-        title: "Traffic Monitoring & Decision Support System",
-        zone: "Colombo Traffic Corridor",
-        category: "Urban Informatics",
-        tags: ["Python", "YOLO", "OpenCV"],
-        cardIndex: 7
-      },
-      {
-        coords: [6.9150, 79.8800], // Colombo Air Quality (Card 9)
-        title: "Air Quality Modelling and PM2.5 Analysis for Colombo Using Python",
-        zone: "Colombo Municipal Area",
-        category: "Environmental Modelling",
-        tags: ["Python", "Colab", "PM2.5 Analysis"],
-        cardIndex: 8
-      },
-      {
-        coords: [8.5700, 81.2300], // Trincomalee Local Plan (Card 10)
+        coords: [8.5700, 81.2300], // Trincomalee Local Plan (Card 6)
         title: "Trincomalee Local Development Plan",
         zone: "Trincomalee Municipal Council Area",
         category: "Local Planning",
         tags: ["ArcGIS Pro", "QGIS", "AutoCAD"],
+        cardIndex: 5
+      },
+      {
+        coords: [6.9271, 79.8612], // Colombo Traffic (Card 5)
+        title: "Traffic Monitoring & Decision Support System",
+        zone: "Colombo Traffic Corridor",
+        category: "Urban Informatics",
+        tags: ["Python", "YOLO", "OpenCV"],
+        cardIndex: 4
+      },
+      {
+        coords: [7.8602, 80.6516], // Dambulla (Card 8)
+        title: "Land Use/Land Cover Classification of Dambulla DSD",
+        zone: "Dambulla Divisional Secretariat Division",
+        category: "Remote Sensing",
+        tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
+        cardIndex: 7
+      },
+      {
+        coords: [9.6800, 80.0070], // Jaffna Coastal Change (Card 9)
+        title: "Land Use Change Detection in the Coastal Areas of Jaffna Using Remote Sensing",
+        zone: "Jaffna Coastal Areas",
+        category: "Remote Sensing",
+        tags: ["Landsat", "ArcMap", "Change Detection"],
+        cardIndex: 8
+      },
+      {
+        coords: [6.9150, 79.8800], // Colombo Air Quality (Card 10)
+        title: "Air Quality Modelling and PM2.5 Analysis for Colombo Using Python",
+        zone: "Colombo Municipal Area",
+        category: "Environmental Modelling",
+        tags: ["Python", "Colab", "PM2.5 Analysis"],
         cardIndex: 9
       }
     ];
