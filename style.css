@@ -2076,9 +2076,11 @@ body.modal-open {
 .leaflet-tile {
   filter: brightness(0.95) contrast(1.02);
   transition: filter 0.3s ease;
-  /* CSS hack to fix browser sub-pixel gap rendering bug at fractional zooms */
-  margin: -1px !important;
-  padding: 1px !important;
+  /* Fix browser sub-pixel gap rendering bug at fractional zooms by scaling tile slightly */
+  width: 100.5% !important;
+  height: 100.5% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   outline: 1px solid transparent;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
