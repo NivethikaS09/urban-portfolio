@@ -590,7 +590,7 @@ CONTACT:
     const projects = [
       {
         coords: [9.6615, 80.0255], // Jaffna
-        title: "Local Identity, Collective Memory & Culture in Post-War Urban Development",
+        title: "Local Identity, Collective Memory, and Culture as Symbolic Representation in Post-War Urban Development: A Case Study of Jaffna",
         zone: "Jaffna, Northern Province",
         category: "Jaffna Case Study",
         tags: ["Qualitative", "Mapping", "Design"],
@@ -643,6 +643,14 @@ CONTACT:
         category: "Environmental Modelling",
         tags: ["Python", "Colab", "PM2.5 Analysis"],
         cardIndex: 7 // Air Quality is Card 8 (index 7)
+      },
+      {
+        coords: [6.7580, 79.8820], // Moratuwa
+        title: "An Urban Gateway to Moratuwa: Transforming an Underutilized Transit Corridor into a Timber Identity & Waterfront Experience Spine",
+        zone: "Egoda Uyana Corridor",
+        category: "Urban Design",
+        tags: ["Urban Design", "Placemaking", "Master Planning"],
+        cardIndex: 8 // Moratuwa is Card 9 (index 8)
       }
     ];
 
