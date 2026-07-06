@@ -2076,6 +2076,9 @@ body.modal-open {
 .leaflet-tile {
   filter: brightness(0.95) contrast(1.02);
   transition: filter 0.3s ease;
+  /* CSS hack to fix browser sub-pixel gap rendering bug at fractional zooms */
+  margin: -0.5px !important;
+  padding: 0.5px !important;
 }
 
 /* Fix grid lines boundary bugs by overriding global img properties */
@@ -2083,7 +2086,11 @@ body.modal-open {
   max-width: none !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0 !important;
+}
+
+/* Set Leaflet container background to match wrapper and blend sub-pixel rendering gaps */
+.leaflet-container {
+  background: #0d0e0c !important;
 }
 
 .leaflet-north-arrow {
