@@ -533,12 +533,46 @@ CONTACT:
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     }).addTo(map);
 
-    // Overlay dark map labels/borders
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+    // Overlay light map labels/borders for high readability on standard satellite map
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 20
     }).addTo(map);
+
+    // Add scale bar to bottom left
+    L.control.scale({
+      position: 'bottomleft',
+      metric: true,
+      imperial: false
+    }).addTo(map);
+
+    // Add custom North Arrow Control to bottom left
+    const NorthArrowControl = L.Control.extend({
+      options: {
+        position: 'bottomleft'
+      },
+      onAdd: function(map) {
+        const div = L.DomUtil.create('div', 'leaflet-north-arrow');
+        div.innerHTML = `
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 42px; height: 42px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));">
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#222" stroke-width="1.5" opacity="0.4" />
+            <polygon points="50,15 57,44 50,40" fill="#fca311" />
+            <polygon points="50,15 43,44 50,40" fill="#e0900f" />
+            <polygon points="50,85 57,56 50,60" fill="#ffffff" />
+            <polygon points="50,85 43,56 50,60" fill="#dddddd" />
+            <polygon points="15,50 44,57 40,50" fill="#ffffff" />
+            <polygon points="15,50 44,43 40,50" fill="#dddddd" />
+            <polygon points="85,50 56,57 60,50" fill="#ffffff" />
+            <polygon points="85,50 56,43 60,50" fill="#dddddd" />
+            <circle cx="50" cy="50" r="4" fill="#222" />
+            <text x="50" y="10" font-family="'Manrope', sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#fca311">N</text>
+          </svg>
+        `;
+        return div;
+      }
+    });
+    map.addControl(new NorthArrowControl());
 
     // Projects geographic coordinate data
     const projects = [
