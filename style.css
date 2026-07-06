@@ -1219,6 +1219,52 @@ button, input, textarea {
   color: var(--accent-terracotta);
 }
 
+
+.social-links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 36px;
+  width: 100%;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  color: var(--text-heading);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.social-btn:hover {
+  border-color: var(--accent-sand);
+  transform: translateY(-3px);
+  background-color: rgba(214, 181, 153, 0.04);
+}
+
+.social-btn .social-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-sand);
+  transition: var(--transition-smooth);
+}
+
+.social-btn:hover .social-icon {
+  color: var(--text-heading);
+  transform: scale(1.1);
+}
+
 .contact-form-panel {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -1356,7 +1402,8 @@ button, input, textarea {
   
   .services-grid,
   .projects-grid,
-  .skills-grid {
+  .skills-grid,
+  .social-links-grid {
     grid-template-columns: 1fr;
   }
   
