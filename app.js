@@ -532,68 +532,76 @@ document.addEventListener('DOMContentLoaded', () => {
     // Projects geographic coordinate data
     const projects = [
       {
-        coords: [9.6615, 80.0255], // Jaffna
-        title: "Local Identity, Collective Memory, and Culture as Symbolic Representation in Post-War Urban Development: A Case Study of Jaffna",
-        zone: "Jaffna, Northern Province",
-        category: "Jaffna Case Study",
-        tags: ["Qualitative", "Mapping", "Design"],
-        cardIndex: 0
-      },
-      {
-        coords: [6.9686, 80.7845], // Nuwara Eliya
-        title: "Heritage Conservation & Sustainable Development",
-        zone: "Nuwara Eliya Municipal Area",
-        category: "Heritage Planning",
-        tags: ["ArcGIS Pro", "MCDM", "Weighted Overlay"],
-        cardIndex: 1
-      },
-      {
-        coords: [7.8731, 80.7718], // National / Sri Lanka Center
-        title: "Mitigating Human–Elephant Conflict Through Sustainable Wild Elephant Tourism",
-        zone: "Sri Lanka (National Scale Study)",
-        category: "Regional Planning",
-        tags: ["Wildlife Tourism", "Policy", "CBT Models"],
-        cardIndex: 2
-      },
-      {
-        coords: [6.9271, 79.8612], // Colombo
-        title: "Traffic Monitoring & Decision Support System",
-        zone: "Colombo Traffic Corridor",
-        category: "Urban Informatics",
-        tags: ["Python", "YOLO", "OpenCV"],
-        cardIndex: 3
-      },
-      {
-        coords: [7.8602, 80.6516], // Dambulla
-        title: "Land Use/Land Cover Classification of Dambulla DSD",
-        zone: "Dambulla Divisional Secretariat Division",
-        category: "Remote Sensing",
-        tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
-        cardIndex: 5 // Dambulla is Card 6 (index 5)
-      },
-      {
-        coords: [9.6800, 80.0070], // Jaffna Coastline
-        title: "Land Use Change Detection in the Coastal Areas of Jaffna Using Remote Sensing",
-        zone: "Jaffna Coastal Areas",
-        category: "Remote Sensing",
-        tags: ["Landsat", "ArcMap", "Change Detection"],
-        cardIndex: 6 // Jaffna Coastline is Card 7 (index 6)
-      },
-      {
-        coords: [6.9150, 79.8800], // Colombo Air Quality
-        title: "Air Quality Modelling and PM2.5 Analysis for Colombo Using Python",
-        zone: "Colombo Municipal Area",
-        category: "Environmental Modelling",
-        tags: ["Python", "Colab", "PM2.5 Analysis"],
-        cardIndex: 7 // Air Quality is Card 8 (index 7)
-      },
-      {
-        coords: [6.7580, 79.8820], // Moratuwa
+        coords: [6.7580, 79.8820], // Moratuwa (Card 1)
         title: "An Urban Gateway to Moratuwa: Transforming an Underutilized Transit Corridor into a Timber Identity & Waterfront Experience Spine",
         zone: "Egoda Uyana Corridor",
         category: "Urban Design",
         tags: ["Urban Design", "Placemaking", "Master Planning"],
-        cardIndex: 8 // Moratuwa is Card 9 (index 8)
+        cardIndex: 0
+      },
+      {
+        coords: [9.6615, 80.0255], // Jaffna Local Identity (Card 2)
+        title: "Local Identity, Collective Memory & Culture in Post-War Urban Development",
+        zone: "Jaffna Town Area",
+        category: "Jaffna Case Study",
+        tags: ["Qualitative", "Mapping", "Design"],
+        cardIndex: 1
+      },
+      {
+        coords: [6.9686, 80.7845], // Nuwara Eliya (Card 3)
+        title: "Heritage Conservation & Sustainable Development",
+        zone: "Nuwara Eliya Municipal Area",
+        category: "Heritage Planning",
+        tags: ["ArcGIS Pro", "MCDM", "Weighted Overlay"],
+        cardIndex: 2
+      },
+      {
+        coords: [7.8602, 80.6516], // Dambulla (Card 4)
+        title: "Land Use/Land Cover Classification of Dambulla DSD",
+        zone: "Dambulla Divisional Secretariat Division",
+        category: "Remote Sensing",
+        tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
+        cardIndex: 3
+      },
+      {
+        coords: [9.6800, 80.0070], // Jaffna Coastal Change (Card 5)
+        title: "Land Use Change Detection in the Coastal Areas of Jaffna Using Remote Sensing",
+        zone: "Jaffna Coastal Areas",
+        category: "Remote Sensing",
+        tags: ["Landsat", "ArcMap", "Change Detection"],
+        cardIndex: 4
+      },
+      {
+        coords: [7.8731, 80.7718], // National Center (Card 6)
+        title: "Mitigating Human–Elephant Conflict Through Sustainable Wild Elephant Tourism",
+        zone: "Sri Lanka (National Scale Study)",
+        category: "Regional Planning",
+        tags: ["Wildlife Tourism", "Policy", "CBT Models"],
+        cardIndex: 5
+      },
+      {
+        coords: [6.9271, 79.8612], // Colombo Traffic (Card 8)
+        title: "Traffic Monitoring & Decision Support System",
+        zone: "Colombo Traffic Corridor",
+        category: "Urban Informatics",
+        tags: ["Python", "YOLO", "OpenCV"],
+        cardIndex: 7
+      },
+      {
+        coords: [6.9150, 79.8800], // Colombo Air Quality (Card 9)
+        title: "Air Quality Modelling and PM2.5 Analysis for Colombo Using Python",
+        zone: "Colombo Municipal Area",
+        category: "Environmental Modelling",
+        tags: ["Python", "Colab", "PM2.5 Analysis"],
+        cardIndex: 8
+      },
+      {
+        coords: [8.5700, 81.2300], // Trincomalee Local Plan (Card 10)
+        title: "Trincomalee Local Development Plan",
+        zone: "Trincomalee Municipal Council Area",
+        category: "Local Planning",
+        tags: ["ArcGIS Pro", "QGIS", "AutoCAD"],
+        cardIndex: 9
       }
     ];
 
