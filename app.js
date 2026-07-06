@@ -516,4 +516,117 @@ CONTACT:
       }
     });
   }
+
+  // ==========================================
+  // 10. Leaflet Project Geographic Map Index
+  // ==========================================
+  const mapElement = document.getElementById('project-leaflet-map');
+  if (mapElement && typeof L !== 'undefined') {
+    // Sri Lanka Centered coordinates [7.8731, 80.7718], Zoom 7.5
+    const map = L.map('project-leaflet-map', {
+      zoomSnap: 0.1,
+      scrollWheelZoom: false // Disable zoom on scroll for page usability
+    }).setView([7.9, 80.7], 7.5);
+
+    // Esri World Imagery (Satellite) tiles
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    // Overlay dark map labels/borders
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
+
+    // Projects geographic coordinate data
+    const projects = [
+      {
+        coords: [9.6615, 80.0255], // Jaffna
+        title: "Local Identity, Collective Memory & Culture in Post-War Urban Development",
+        zone: "Jaffna, Northern Province",
+        category: "Jaffna Case Study",
+        tags: ["Qualitative", "Mapping", "Design"],
+        cardIndex: 0
+      },
+      {
+        coords: [6.9686, 80.7845], // Nuwara Eliya
+        title: "Heritage Conservation & Sustainable Development",
+        zone: "Nuwara Eliya Municipal Area",
+        category: "Heritage Planning",
+        tags: ["ArcGIS Pro", "MCDM", "Weighted Overlay"],
+        cardIndex: 1
+      },
+      {
+        coords: [7.8731, 80.7718], // National / Sri Lanka Center
+        title: "Mitigating Human–Elephant Conflict Through Sustainable Wild Elephant Tourism",
+        zone: "Sri Lanka (National Scale Study)",
+        category: "Regional Planning",
+        tags: ["Wildlife Tourism", "Policy", "CBT Models"],
+        cardIndex: 2
+      },
+      {
+        coords: [6.9271, 79.8612], // Colombo
+        title: "Traffic Monitoring & Decision Support System",
+        zone: "Colombo Traffic Corridor",
+        category: "Urban Informatics",
+        tags: ["Python", "YOLO", "OpenCV"],
+        cardIndex: 3
+      },
+      {
+        coords: [7.8602, 80.6516], // Dambulla
+        title: "Land Use/Land Cover Classification of Dambulla DSD",
+        zone: "Dambulla Divisional Secretariat Division",
+        category: "Remote Sensing",
+        tags: ["Landsat 7", "Supervised", "ArcGIS Pro"],
+        cardIndex: 5 // Dambulla is Card 6 (index 5)
+      }
+    ];
+
+    // Global helper function to trigger the lightbox modal open from map popup click
+    window.openProjectModalFromMap = function(cardIndex) {
+      const cards = document.querySelectorAll('.project-card');
+      if (cards[cardIndex]) {
+        cards[cardIndex].click();
+      }
+    };
+
+    // Custom marker icon creation using DivIcon to allow custom CSS styling
+    const customIcon = L.divIcon({
+      html: '<div class="map-marker-pin"></div>',
+      className: 'custom-map-marker',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    // Populate markers on Leaflet map
+    projects.forEach(project => {
+      const marker = L.marker(project.coords, { icon: customIcon }).addTo(map);
+
+      // Bind custom themed popup
+      const popupContent = `
+        <div class="map-popup-card">
+          <span class="map-popup-tag">${project.category}</span>
+          <h4 class="map-popup-title">${project.title}</h4>
+          <div class="map-popup-location">
+            <svg class="map-popup-loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>Zone: ${project.zone}</span>
+          </div>
+          <div class="map-popup-tags">
+            ${project.tags.map(tag => `<span class="map-popup-badge">${tag}</span>`).join('')}
+          </div>
+          <a href="javascript:void(0);" onclick="openProjectModalFromMap(${project.cardIndex})" class="map-popup-link">View details &rarr;</a>
+        </div>
+      `;
+
+      marker.bindPopup(popupContent, {
+        closeButton: true,
+        offset: L.point(0, -6)
+      });
+    });
+  }
 });
