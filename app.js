@@ -250,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const animateCounter = (el) => {
     const target = parseFloat(el.getAttribute('data-target'));
     const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+    const suffix = el.getAttribute('data-suffix') || '';
     const duration = 1500; // ms
     const startTime = performance.now();
 
@@ -261,15 +262,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const easeProgress = progress * (2 - progress);
       const currentVal = easeProgress * target;
       
-      el.textContent = currentVal.toFixed(decimals) + (el.textContent.includes('+') && progress === 1 ? '+' : '');
+      let formattedVal;
+      if (progress === 1) {
+        // Format final value with commas and correct decimal digits
+        formattedVal = target.toLocaleString('en-US', { 
+          minimumFractionDigits: decimals, 
+          maximumFractionDigits: decimals 
+        });
+      } else {
+        // Format intermediate value
+        const roundedVal = parseFloat(currentVal.toFixed(decimals));
+        formattedVal = roundedVal.toLocaleString('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+      }
+      
+      el.textContent = formattedVal + suffix;
       
       if (progress < 1) {
         requestAnimationFrame(update);
-      } else {
-        // Ensure final values are clean and include any indicator symbols
-        if (target === 4) el.textContent = '4+';
-        else if (target === 10) el.textContent = '10+';
-        else el.textContent = target.toFixed(decimals);
       }
     };
 
