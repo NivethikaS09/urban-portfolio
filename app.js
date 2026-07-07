@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handled natively by browser link attributes in index.html
 
   // ==========================================
-  // 7. Contact Form Simulation
+  // 7. Contact Form Integration (FormSubmit.co AJAX)
   // ==========================================
   const contactForm = document.getElementById('portfolio-contact-form');
   const formStatus = document.getElementById('form-status');
@@ -354,6 +354,10 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const name = document.getElementById('form-name').value;
+      const email = document.getElementById('form-email').value;
+      const subject = document.getElementById('form-subject').value || "No Subject";
+      const message = document.getElementById('form-message').value;
+      
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       
@@ -363,17 +367,45 @@ document.addEventListener('DOMContentLoaded', () => {
       formStatus.className = 'form-status-message';
       formStatus.textContent = '';
       
-      // Simulate API call delay
-      setTimeout(() => {
+      // Send message to FormSubmit.co via AJAX
+      fetch("https://formsubmit.co/ajax/sivanivethy09@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: name,
+          Email: email,
+          Subject: subject,
+          Message: message,
+          _subject: `New Portfolio Message from ${name}`
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(data => {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
         
-        formStatus.classList.add('success');
+        formStatus.className = 'form-status-message success';
         formStatus.textContent = `Thank you, ${name}! Your transmission was successful. I'll connect with you shortly.`;
         
         // Reset form
         contactForm.reset();
-      }, 1500);
+      })
+      .catch(error => {
+        console.error('Error submitting form:', error);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        formStatus.className = 'form-status-message error';
+        formStatus.textContent = 'Oops! There was a problem transmitting your message. Please try again or email directly.';
+      });
     });
   }
 
