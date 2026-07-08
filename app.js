@@ -7,6 +7,38 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
+  // 0. Theme Toggle Selection (Light/Dark)
+  // ==========================================
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const sunIcon = themeToggleBtn ? themeToggleBtn.querySelector('.sun-icon') : null;
+  const moonIcon = themeToggleBtn ? themeToggleBtn.querySelector('.moon-icon') : null;
+
+  // Set the correct visible icon based on the active theme
+  const isLightTheme = document.documentElement.classList.contains('light-theme');
+  if (isLightTheme && sunIcon && moonIcon) {
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+
+  if (themeToggleBtn && sunIcon && moonIcon) {
+    themeToggleBtn.addEventListener('click', () => {
+      const activeTheme = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+      
+      if (activeTheme === 'light') {
+        document.documentElement.classList.remove('light-theme');
+        localStorage.setItem('portfolio-theme', 'dark');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        document.documentElement.classList.add('light-theme');
+        localStorage.setItem('portfolio-theme', 'light');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    });
+  }
+
+  // ==========================================
   // 0. Fullscreen Preloader Logic (Road Building Theme)
   // ==========================================
   const preloader = document.getElementById('preloader');
