@@ -980,13 +980,8 @@ button, input, textarea {
   height: 100%;
   background: linear-gradient(90deg, var(--accent-sage), var(--accent-sand));
   border-radius: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.skills-tab-content.active .skill-progress-fill {
-  transform: scaleX(1);
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skills-footer-text {

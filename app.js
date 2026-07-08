@@ -442,36 +442,72 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 8. Competencies Toolkit Tab Switcher
+  // 8. Competencies Toolkit Tab Switcher & Staggered Progress Animations
   // ==========================================
   const tabButtons = document.querySelectorAll('.skills-tab-btn');
   const tabContents = document.querySelectorAll('.skills-tab-content');
 
+  function animateProgressBars(container) {
+    if (!container) return;
+    const fills = container.querySelectorAll('.skill-progress-fill');
+    fills.forEach((fill, index) => {
+      if (!fill.hasAttribute('data-width')) {
+        const targetWidth = fill.style.width || '0%';
+        fill.setAttribute('data-width', targetWidth);
+      }
+      
+      const widthVal = fill.getAttribute('data-width');
+      
+      // Reset width to 0% with transitions disabled to allow replay
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      
+      // Force reflow/repaint
+      fill.offsetHeight;
+      
+      // Re-enable transitions and animate to target width with staggered delay
+      fill.style.transition = 'width 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => {
+        fill.style.width = widthVal;
+      }, index * 60);
+    });
+  }
+
+  // Handle Tab Switch Click
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Remove active class from all buttons
       tabButtons.forEach(b => b.classList.remove('active'));
-      // Add active class to clicked button
       btn.classList.add('active');
 
-      // Hide all tab contents
       tabContents.forEach(content => content.classList.remove('active'));
-      // Show clicked tab content
+      
       const tabId = `tab-content-${btn.getAttribute('data-tab')}`;
       const targetContent = document.getElementById(tabId);
       if (targetContent) {
         targetContent.classList.add('active');
-        
-        // Force browser to recalculate layout so progress bar scale transitions replay
-        const fills = targetContent.querySelectorAll('.skill-progress-fill');
-        fills.forEach(fill => {
-          fill.style.transform = 'scaleX(0)';
-          fill.getBoundingClientRect(); // Trigger layout reflow
-          fill.style.transform = '';
-        });
+        animateProgressBars(targetContent);
       }
     });
   });
+
+  // Observe the skills section to trigger the animation when it enters the viewport
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) {
+    const skillsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const activeTab = document.querySelector('.skills-tab-content.active');
+          if (activeTab) {
+            animateProgressBars(activeTab);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+    skillsObserver.observe(skillsSection);
+  }
 
   // ==========================================
   // 9. Project Card Details Lightbox Modal Logic
